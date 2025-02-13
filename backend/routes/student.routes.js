@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const studentController = require('../controllers/student.controller.js');
+const studentController = require('../controller/student.controller.js');
 
-router.get('api/student/', studentController.getStudents);
-router.get('api/student/:id', studentController.getStudent);
-router.post('api/student/', studentController.addStudent);
-router.put('api/student/:id', studentController.updateStudent);
-router.delete('api/student/:id', studentController.deleteStudent);
+router.get('/', studentController.getStudents);
+router.get('/:id', studentController.getStudent);
+router.post('/', studentController.addStudent);
+router.put('/:id', studentController.updateStudent);
+router.delete('/:id', studentController.deleteStudent);
 
 module.exports = router;

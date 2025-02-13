@@ -3,7 +3,7 @@ const Student = require("../model/student.model.js");
 const getStudents = async (req, res) => {
     try {
         const student = await Student.find({});
-        res.state(200).json(student);
+        res.status(200).json(student);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -20,7 +20,13 @@ const addStudent = async (req, res) => {
 
 const getStudent = async (req, res) => {
     try {
-        const student = await Student.findById(req.params.id);
+        const { stid } = req.params;
+        console.log({ stid });
+        const student = await Student.findOne({ stid });
+        if(!student) {
+            return res.status(404).json({ message: "Student not found" });
+        }
+        res.status(200).json(student);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

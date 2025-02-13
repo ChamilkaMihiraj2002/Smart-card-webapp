@@ -16,7 +16,7 @@ const classSchema = mongoose.Schema (
         },
 
         time: {
-            type: time,
+            type: String,
             required: true,
         },
 
