@@ -5,13 +5,13 @@ const studentSchema = mongoose.Schema (
     {
         stid: {
             type: String,
-            required: true,
-            unique: true 
+            required: [true, "Student ID is required"],
+            unique: [true, "Student ID is Already Existing"]
         },
 
         name: {
             type: String,
-            required: [true, 'Product name is required']
+            required: [true, 'student name is required']
         },
 
         age: {
@@ -20,7 +20,7 @@ const studentSchema = mongoose.Schema (
             default: 0
         },
 
-        class: {
+        StudentClass: {
             type: String,
             required: true,
         },
@@ -30,13 +30,8 @@ const studentSchema = mongoose.Schema (
             required: false
         },
         
-    },
-
-    {
-        timestamp:true
     }
-
-)
+);
 
 const Student = mongoose.model("Student", studentSchema);
 module.exports = Student;

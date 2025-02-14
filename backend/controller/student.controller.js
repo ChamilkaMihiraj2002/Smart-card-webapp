@@ -7,35 +7,51 @@ const getStudents = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
-}
+};
 
 const addStudent = async (req, res) => {
     try {
+        const { stid } = req.body;
+
+        // Check if a student with the same stid already exists
+        const existingStudent = await Student.findOne({ stid });
+        if (existingStudent) {
+            return res.status(400).json({ message: 'Duplicate student id' });
+        }
+
+        // If no duplicate, create the new student
         const student = await Student.create(req.body);
         res.status(200).json(student);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        if (error.name === 'ValidationError') {
+            const messages = Object.values(error.errors).map(err => err.message);
+            res.status(400).json({ message: messages.join(', ') });
+        } else {
+            res.status(500).json({ message: error.message });
+        }
     }
-}
+};
 
 const getStudent = async (req, res) => {
     try {
         const { stid } = req.params;
-        console.log({ stid });
         const student = await Student.findOne({ stid });
-        if(!student) {
-            return res.status(404).json({ message: "Student not found" });
+
+        if (!student) {
+            return res.status(404).json({ message: `Student not found with id: ${stid}` });
         }
+
         res.status(200).json(student);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        console.error("Error fetching student:", error);
+        res.status(500).json({ message: "Internal Server Error" });
     }
-}
+};
 
 const updateStudent = async (req, res) => {
     try {
-        const {id} = req.params;
-        const student = await Student.findByIdAndUpdate(id, req.body);
+        const { stid } = req.params;
+        const student = await Student.findOneAndUpdate({ stid }, req.body);
 
         if(!student) {
             return res.status(404).json({ message: "Student not found" });
@@ -44,14 +60,21 @@ const updateStudent = async (req, res) => {
         res.status(200).json(updatedStudent);
 
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        if (error.name === 'ValidationError') {
+            const messages = Object.values(error.errors).map(err => err.message);
+            return res.status(400).json({ message: messages.join(', ') });
+        } else if (error.code === 11000) {
+            return res.status(400).json({ message: 'Duplicate Student id' });
+        } else {
+            return res.status(500).json({ message: error.message });
+        }
     }
-}
+};
 
 const deleteStudent = async (req, res) => {
     try {
-        const {id} = req.params;
-        const student = await Student.findByIdAndDelete(id, req.body);
+        const { stid } = req.params;
+        const student = await Student.findOneAndDelete({ stid });
 
         if(!student) {
             return res.status(404).json({ message: "Student not found" });
@@ -61,7 +84,7 @@ const deleteStudent = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
-}
+};
 
 module.exports = {
     getStudents,

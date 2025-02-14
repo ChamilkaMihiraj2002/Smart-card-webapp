@@ -20,12 +20,8 @@ const classSchema = mongoose.Schema (
             required: true,
         },
 
-    },
-
-    {
-        timestamp:true
     }
-)
+);
 
 const Class = mongoose.model("Class", classSchema);
 module.exports = Class;
