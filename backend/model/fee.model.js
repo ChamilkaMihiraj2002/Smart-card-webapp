@@ -5,22 +5,28 @@ const feeSchema = mongoose.Schema (
     {
         classId:{
             type: String,
-            required: true,
+            required: [true, 'Class Id name is required'],
         },
 
-        stid: {
+        stId: {
             type: String,
-            required: true,
+            required: [true, 'student Id name is required'],
         },
 
         amount: {
             type: Number,
-            required: true,
+            required: [true, 'Amount is required'],
+            validate: {
+                validator: function (value) {
+                    return value >= 800 && value <= 2500; 
+                },
+                message: 'Amount must be greater than 800 and less than 2500', 
+            },
         },
 
         month: {
             type:String,
-            required:true,
+            required:[true, 'Month is required'],
         }
     }
 );

@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const studentSchema = mongoose.Schema (
     {
-        stid: {
+        stId: {
             type: String,
             required: [true, "Student ID is required"],
             unique: [true, "Student ID is Already Existing"]
@@ -16,13 +16,13 @@ const studentSchema = mongoose.Schema (
 
         age: {
             type: Number,
-            required: true,
+            required: [true, 'student age is required'],
             default: 0
         },
 
         StudentClass: {
             type: String,
-            required: true,
+            required: [true, 'student Class is required'],
         },
 
         mobile_number: {

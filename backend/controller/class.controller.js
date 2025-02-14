@@ -12,40 +12,61 @@ const getClasses = async (req, res) => {
 const addClass = async (req, res) => {
     try {
         const classes = await Class.create(req.body);
-        res.status(200).json(getClasses);
+        res.status(200).json(classes);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        if (error.name === 'ValidationError') {
+            const messages = Object.values(error.errors).map(err => err.message);
+            res.status(400).json({ message: messages.join(', ') });
+        } else if (error.code === 11000) {
+            res.status(400).json({ message: 'Duplicate class id' });
+        } else {
+            res.status(500).json({ message: error.message });
+        }
     }
 }
 
 const getClass = async (req, res) => {
     try {
-        const classes = await Class.findById(req.params.id);
+        const { classId } = req.params;
+        const classes = await Class.findOne({ classId });
+
+        if (!classes) {
+            return res.status(404).json({ message: `Classs not found with id: ${classId}` });
+        }
+
         res.status(200).json(classes);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        console.error("Error fetching student:", error);
+        res.status(500).json({ message: "Internal Server Error" });
     }
 }
 
 const updateClass = async (req, res) => {
     try {
-        const {id} = req.params;
-        const classes = await Class.findByIdAndUpdate(id, req.body);
+        const { classId } = req.params;
+        const classes = await Class.findOneAndUpdate({ classId }, req.body);
 
         if(!classes) {
             return res.status(404).json({ message: "Class not found" });
         }
-        const updatedClass = await Class.findById(id);
+        const updatedClass = await Class.findOne({ classId });
         res.status(200).json(updatedClass);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        if (error.name === 'ValidationError') {
+            const messages = Object.values(error.errors).map(err => err.message);
+            return res.status(400).json({ message: messages.join(', ') });
+        } else if (error.code === 11000) {
+            return res.status(400).json({ message: 'Duplicate Class id' });
+        } else {
+            return res.status(500).json({ message: error.message });
+        }
     }
 }
 
 const deleteClass = async (req, res) => {
     try {
-        const {id} = req.params;
-        const classes = await Class.findByIdAndDelete(id);
+        const { classId } = req.params;
+        const classes = await Class.findOneAndDelete({ classId } );
 
         if(!classes) {
             return res.status(404).json({ message: "Class not found" });

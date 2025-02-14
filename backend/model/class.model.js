@@ -6,18 +6,18 @@ const classSchema = mongoose.Schema (
     {
         classId:{
             type: String,
-            required: true,
-            unique: true
+            required: [true, "Class ID is required"],
+            unique: [true, "Class ID is Already Existing"]
         },
 
         teacher: {
             type: String,
-            required: true,
+            required: [true, 'Teacher name is required'],
         },
 
         time: {
             type: String,
-            required: true,
+            required: [true, 'Time is required'],
         },
 
     }
