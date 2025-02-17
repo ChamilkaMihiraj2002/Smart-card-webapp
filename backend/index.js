@@ -5,6 +5,7 @@ const classRoutes = require('./routes/class.routes.js');
 const feeRoutes = require('./routes/fee.routes.js');
 const studentRoutes = require('./routes/student.routes.js');
 const accountingRoutes = require('./routes/accounting.routes.js');
+const userRouts = require('./routes/user.routes.js');
 const app = express()
 
 const PORT = process.env.PORT || 3000;
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // routes configuration
+app.use('/api/users', userRouts);
 app.use('/api/classes', classRoutes);
 app.use('/api/fees', feeRoutes);
 app.use('/api/students', studentRoutes);
