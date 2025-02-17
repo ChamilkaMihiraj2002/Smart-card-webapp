@@ -17,7 +17,13 @@ const studentSchema = mongoose.Schema (
         age: {
             type: Number,
             required: [true, 'student age is required'],
-            default: 0
+            default: 0,
+            validate:{
+                validator: function(value) {
+                    return value < 22;
+                },
+                message: 'Age must be less than 22'
+            }
         },
 
         StudentClass: {

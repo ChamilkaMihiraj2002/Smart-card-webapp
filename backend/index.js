@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const classRoutes = require('./routes/class.routes.js');
 const feeRoutes = require('./routes/fee.routes.js');
 const studentRoutes = require('./routes/student.routes.js');
+const accountingRoutes = require('./routes/accounting.routes.js');
 const app = express()
 
 const PORT = process.env.PORT || 3000;
@@ -17,6 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/classes', classRoutes);
 app.use('/api/fees', feeRoutes);
 app.use('/api/students', studentRoutes);
+app.use('/api/accounting', accountingRoutes);
 
 
 app.get('/', function (req, res) {
