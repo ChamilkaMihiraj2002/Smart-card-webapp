@@ -1,4 +1,5 @@
 const User = require('../model/user.model.js');
+const bcrypt = require('bcrypt');
 
 const getUsers = async (req, res) => {
     try {
@@ -11,7 +12,10 @@ const getUsers = async (req, res) => {
 
 const addUser = async (req, res) => {
     try {
-        const user = await User.create(req.body);
+        const salt = await bcrypt.genSalt();
+        const hashedPassword = await bcrypt.hash(req.body.password, salt);
+        const userData = { ...req.body, password: hashedPassword };
+        const user = await User.create(userData);
         res.status(200).json(user);
     } catch (error) {
         if (error.name === 'ValidationError') {
@@ -78,10 +82,30 @@ const deleteUser = async (req, res) => {
     } 
 };
 
+const login = async (req, res) => {
+    try {
+        const user = await User.findOne({ name: req.body.name });
+
+        if (user == null) {
+            return res.status(400).send('Cannot find user');
+        }
+
+        if (await bcrypt.compare(req.body.password, user.password)) {
+            res.send('Success');
+        } else {
+            res.send('Not Allowed');
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+
 module.exports = { 
     getUsers, 
     addUser, 
     getUser, 
     updateUser, 
-    deleteUser 
+    deleteUser,
+    login 
 };
