@@ -6,6 +6,7 @@ const feeRoutes = require('./routes/fee.routes.js');
 const studentRoutes = require('./routes/student.routes.js');
 const accountingRoutes = require('./routes/accounting.routes.js');
 const userRouts = require('./routes/user.routes.js');
+const attendanceRoutes = require('./routes/attendance.routes.js');
 const app = express()
 
 const PORT = process.env.PORT || 3000;
@@ -21,6 +22,7 @@ app.use('/api/classes', classRoutes);
 app.use('/api/fees', feeRoutes);
 app.use('/api/students', studentRoutes);
 app.use('/api/accounting', accountingRoutes);
+app.use('/api/attendance', attendanceRoutes);
 
 
 app.get('/', function (req, res) {

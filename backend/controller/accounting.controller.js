@@ -1,5 +1,5 @@
-const Accounting = require('../model/accounting.model');
-const Fee = require('../model/fee.model');
+const Accounting = require('../model/accounting.model.js');
+const Fee = require('../model/fee.model.js');
 
 const accountingController = {
     // Add new transaction
