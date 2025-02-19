@@ -93,7 +93,7 @@ const login = async (req, res) => {
         if (await bcrypt.compare(req.body.password, user.password)) {
             res.send('Success');
         } else {
-            res.send('Not Allowed');
+            res.send('Password not matched');
         }
     } catch (error) {
         res.status(500).json({ message: error.message });
