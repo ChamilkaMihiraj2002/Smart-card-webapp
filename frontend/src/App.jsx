@@ -1,9 +1,16 @@
-import './App.css'
+import { Button } from 'antd';
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Login from './pages/Login.jsx';
 
 function App() {
   return (
     <>
-      <h1>hello</h1>
+     <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="*" element={<Navigate to="/login" />} />
+      </Routes>
+    </Router>
     </>
   )
 }
