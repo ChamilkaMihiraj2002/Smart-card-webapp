@@ -1,5 +1,7 @@
 const User = require('../model/user.model.js');
 const bcrypt = require('bcrypt');
+require('dotenv').config();
+const jwt = require('jsonwebtoken');
 
 const getUsers = async (req, res) => {
     try {
@@ -86,19 +88,29 @@ const login = async (req, res) => {
     try {
         const user = await User.findOne({ name: req.body.name });
 
-        if (user == null) {
-            return res.status(400).send('Cannot find user');
+        if (!user) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'User not found' 
+            });
         }
 
         if (await bcrypt.compare(req.body.password, user.password)) {
-            res.send('Success');
+            // Convert Mongoose document to plain object
+            const userPayload = { id: user._id, name: user.name };
+
+            // Generate JWT
+            const accessToken = jwt.sign(userPayload, process.env.ACCESS_TOKEN_SECRET);
+
+            return res.json({ success: true, accessToken });
         } else {
-            res.send('Password not matched');
+            return res.status(401).json({ success: false, message: 'Password not matched' });
         }
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
+
 
 
 module.exports = { 
