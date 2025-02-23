@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Input, Button, Card, Typography, message } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { UserOutlined, LockOutlined, LoginOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
@@ -23,6 +23,9 @@ const Login = () => {
   return (
     <div className="login-container">
       <Card className="login-card">
+        <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+          <LoginOutlined style={{ fontSize: '48px', color: '#1890ff' }} />
+        </div>
         <Title level={2} className="login-title">Welcome Back</Title>
         <Form
           name="login"
@@ -57,6 +60,12 @@ const Login = () => {
               Log in
             </Button>
           </Form.Item>
+
+          <div style={{ textAlign: 'center' }}>
+            <Typography.Text type="secondary">
+              Don't have an account? <a href="/register">Register here</a>
+            </Typography.Text>
+          </div>
         </Form>
       </Card>
     </div>
