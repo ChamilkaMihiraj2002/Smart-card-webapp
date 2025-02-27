@@ -77,7 +77,7 @@ const Login = () => {
 
           <div style={{ textAlign: 'center' }}>
             <Typography.Text type="secondary">
-              Don&apos;t have an account? <a href="/register">Register here</a>
+              Don&apos;t have an account? <a href="http://localhost:5173/registration">Register here</a>
             </Typography.Text>
           </div>
         </Form>

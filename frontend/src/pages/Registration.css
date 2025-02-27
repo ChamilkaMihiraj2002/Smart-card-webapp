@@ -1,0 +1,73 @@
+.registration-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 24px;
+    background: linear-gradient(135deg, #f0f2f5 0%, #e6e9ec 100%);
+}
+  
+.registration-card {
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.registration-card:hover {
+    transform: translateY(-5px);
+}
+  
+.registration-card .ant-card-head {
+    background: linear-gradient(90deg, #1890ff 0%, #0050b3 100%);
+    border-radius: 8px 8px 0 0;
+}
+
+.registration-card .ant-card-head-title {
+    text-align: center;
+    font-size: 24px;
+    color: white;
+    padding: 16px 0;
+}
+
+.site-form-item-icon {
+    color: #1890ff;
+    transition: color 0.3s ease;
+}
+
+.ant-input-affix-wrapper:hover .site-form-item-icon {
+    color: #40a9ff;
+}
+
+.ant-form-item-label > label {
+    font-weight: 600;
+    color: #262626;
+}
+
+.ant-input-affix-wrapper {
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.ant-input-affix-wrapper:hover {
+    border-color: #40a9ff;
+}
+
+.ant-input-affix-wrapper-focused {
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+.ant-btn-primary {
+    height: 40px;
+    font-size: 16px;
+    border-radius: 6px;
+    background: linear-gradient(90deg, #1890ff 0%, #0050b3 100%);
+    border: none;
+    transition: transform 0.2s ease;
+}
+
+.ant-btn-primary:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(90deg, #40a9ff 0%, #1890ff 100%);
+}
