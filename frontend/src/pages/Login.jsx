@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input, Button, Card, Typography, message } from 'antd';
 import { UserOutlined, LockOutlined, LoginOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; // Make sure to install axios
 import './Login.css';
 
 const { Title } = Typography;
@@ -11,12 +12,25 @@ const Login = () => {
 
   const onFinish = async (values) => {
     try {
-      // TODO: Implement your login logic here
-      console.log('Received values:', values);
-      message.success('Login successful!');
-      navigate('/dashboard'); // Navigate to dashboard after successful login
+      const response = await axios.post('http://localhost:3000/api/users/login', {
+        username: values.username,
+        password: values.password
+      });
+
+      if (response.data && response.data.success && response.data.accessToken) {
+        // Store the token in localStorage
+        localStorage.setItem('token', response.data.accessToken);
+        // Set the default Authorization header for future requests
+        axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;
+        
+        message.success('Login successful!');
+        navigate('/dashboard');
+      } else {
+        message.error('Login failed. Invalid response from server.');
+      }
     } catch (error) {
-      message.error('Login failed. Please try again.');
+      console.error('Login error:', error);
+      message.error(error.response?.data?.message || 'Login failed. Please try again.');
     }
   };
 
@@ -63,7 +77,7 @@ const Login = () => {
 
           <div style={{ textAlign: 'center' }}>
             <Typography.Text type="secondary">
-              Don't have an account? <a href="/register">Register here</a>
+              Don&apos;t have an account? <a href="/register">Register here</a>
             </Typography.Text>
           </div>
         </Form>
