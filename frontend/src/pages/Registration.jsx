@@ -1,18 +1,33 @@
 import React from 'react';
 import { Form, Input, Button, Card, message } from 'antd';
 import { UserOutlined, LockOutlined, MailOutlined, IdcardOutlined, FormOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 import './Registration.css';
 
 const Registration = () => {
   const [form] = Form.useForm();
+  const navigate = useNavigate();
 
   const onFinish = async (values) => {
     try {
-      // Here you would typically make an API call to register the user
-      console.log('Registration values:', values);
+      const response = await fetch('http://localhost:3000/api/users/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
       message.success('Registration successful!');
       form.resetFields();
+      navigate('/dashboard');
     } catch (error) {
+      console.error('Registration error:', error);
       message.error('Registration failed. Please try again.');
     }
   };
