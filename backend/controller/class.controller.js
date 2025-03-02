@@ -77,10 +77,20 @@ const deleteClass = async (req, res) => {
     }
 }
 
+const getClassCount = async (req, res) => {
+    try {
+        const count = await Class.countDocuments({});
+        res.status(200).json({ count });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 module.exports = {
     getClasses,
     addClass,
     getClass,
     updateClass,
-    deleteClass
+    deleteClass,
+    getClassCount
 };

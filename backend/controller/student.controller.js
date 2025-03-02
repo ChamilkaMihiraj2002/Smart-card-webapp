@@ -79,10 +79,20 @@ const deleteStudent = async (req, res) => {
     }
 };
 
+const getStudentCount = async (req, res) => {
+    try {
+        const count = await Student.countDocuments({});
+        res.status(200).json({ count });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 module.exports = {
     getStudents,
     addStudent,
     getStudent,
     updateStudent,
-    deleteStudent
+    deleteStudent,
+    getStudentCount
 };

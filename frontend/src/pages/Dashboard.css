@@ -1,0 +1,175 @@
+.dashboard-container {
+    min-height: 100vh;
+    background: linear-gradient(to right, #ffffff, #f3f6f7);
+}
+
+.dashboard-content {
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dashboard-title {
+    margin-bottom: 32px;
+    color: #1a1a1a;
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+    position: relative;
+    padding-bottom: 12px;
+}
+
+.dashboard-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: #1890ff;
+    border-radius: 2px;
+}
+
+.stat-card {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    transition: all 0.4s ease;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    padding: 24px;
+    height: 160px; /* Fixed height */
+    width: 100%;
+    min-width: 240px; /* Minimum width */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-color: #1890ff;
+}
+
+.stat-card .ant-statistic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.stat-card .ant-statistic-title {
+    font-size: 18px;
+    margin-bottom: 16px;
+    color: #595959;
+    font-weight: 500;
+}
+
+.stat-card .ant-statistic-content {
+    font-size: 28px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Update the stat-card anticon styles */
+.stat-card .anticon {
+    font-size: 32px;
+    margin-right: 12px;
+    transition: all 0.3s ease;
+}
+
+/* Add specific icon colors for each card */
+.students-stat .anticon {
+    color: #3f8600;
+}
+
+.classes-stat .anticon {
+    color: #1890ff;
+}
+
+.users-stat .anticon {
+    color: #722ed1;
+}
+
+.date-stat .anticon {
+    color: #cf1322;
+}
+
+/* Add a hover effect for icons */
+.stat-card:hover .anticon {
+    transform: scale(1.1);
+}
+
+.stat-card .anticon {
+    font-size: 28px;
+    margin-right: 12px;
+    opacity: 0.8;
+}
+
+.students-stat .ant-statistic-content-value {
+    color: #3f8600;
+    font-size: 28px;
+}
+
+.classes-stat .ant-statistic-content-value {
+    color: #1890ff;
+    font-size: 28px;
+}
+
+.users-stat .ant-statistic-content-value {
+    color: #722ed1;
+    font-size: 28px;
+}
+
+.date-stat .ant-statistic-content-value {
+    color: #cf1322;
+    font-size: 28px;
+}
+
+.dashboard-footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.02);
+    border-top: 1px solid #f0f0f0;
+    font-size: 14px;
+    color: #595959;
+}
+
+@media (max-width: 768px) {
+    .dashboard-content {
+        padding: 16px;
+    }
+    
+    .dashboard-title {
+        font-size: 24px;
+    }
+    
+    .stat-card {
+        margin-bottom: 16px;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ant-card-head-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.ant-card {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}

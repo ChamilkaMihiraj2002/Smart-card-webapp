@@ -1,12 +1,20 @@
 import React from "react";
 import { Menu } from "antd";
-import { DashboardOutlined, UserOutlined, TeamOutlined, BookOutlined, DollarOutlined, BankOutlined } from "@ant-design/icons";
+import { 
+  DashboardOutlined, 
+  UserOutlined, 
+  TeamOutlined, 
+  BookOutlined, 
+  DollarOutlined, 
+  BankOutlined,
+  LogoutOutlined 
+} from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const navigate = useNavigate();
 
-  const items = [
+  const menuItems = [
     { label: "Dashboard", key: "dashboard", icon: <DashboardOutlined /> },
     { label: "Students", key: "students", icon: <UserOutlined /> },
     { label: "Class", key: "class", icon: <BookOutlined /> },
@@ -16,7 +24,22 @@ const Navbar = () => {
     { label: "User", key: "user", icon: <UserOutlined /> },
   ];
 
+  const logoutItem = {
+    label: "Logout",
+    key: "logout",
+    icon: <LogoutOutlined />,
+    style: { marginLeft: 'auto' }
+  };
+
+  const items = [...menuItems, logoutItem];
+
   const handleClick = ({ key }) => {
+    if (key === 'logout') {
+      // Add your logout logic here
+      // For example: clear localStorage, reset auth state, etc.
+      navigate('/login');
+      return;
+    }
     navigate(`/${key}`);
   };
 

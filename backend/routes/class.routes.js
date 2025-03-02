@@ -8,5 +8,6 @@ router.get('/:classId', authenticateToken, classController.getClass);
 router.post('/', authenticateToken, classController.addClass);
 router.put('/:classId', authenticateToken, classController.updateClass);
 router.delete('/:classId', authenticateToken, classController.deleteClass);
+router.get('/count', authenticateToken, classController.getClassCount);
 
 module.exports = router;
