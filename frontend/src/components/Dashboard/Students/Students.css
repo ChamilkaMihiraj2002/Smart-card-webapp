@@ -1,0 +1,162 @@
+/* Main Layout */
+.student-layout {
+    min-height: 100vh;
+}
+
+/* Content section */
+.student-content {
+    padding: 24px;
+    background: linear-gradient(to bottom right, #f0f2f5, #ffffff);
+    min-height: calc(100vh - 64px - 70px); /* Accounting for header and footer */
+}
+
+/* Action bar with add button */
+.action-bar {
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.action-bar button {
+    transition: all 0.3s ease;
+    height: 40px;
+    padding: 0 24px;
+    font-weight: 500;
+    border-radius: 6px;
+}
+
+.action-bar button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Table styling */
+.student-table {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.student-table .ant-table {
+    background: transparent;
+}
+
+.student-table .ant-table-thead > tr > th {
+    background-color: #f0f7ff;
+    font-weight: 600;
+    padding: 16px;
+    font-size: 15px;
+}
+
+.student-table .ant-table-tbody > tr > td {
+    padding: 16px;
+    transition: background 0.3s;
+}
+
+.student-table .ant-table-tbody > tr:hover > td {
+    background-color: #f8f9ff;
+}
+
+/* Pagination styling */
+.student-table .ant-pagination {
+    padding: 16px;
+    text-align: right;
+}
+
+.student-table .ant-pagination-item {
+    margin: 0 4px;
+}
+
+.student-table .ant-pagination-item-active {
+    font-weight: 600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 800px) {
+    .student-content {
+        padding: 16px;
+    }
+
+    .student-table {
+        border-radius: 8px;
+    }
+
+    .student-table .ant-table-thead > tr > th,
+    .student-table .ant-table-tbody > tr > td {
+        padding: 12px 8px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    .action-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .action-bar button {
+        width: 100%;
+    }
+
+    .student-table .ant-pagination {
+        padding: 12px;
+        text-align: center;
+    }
+}
+
+/* Loading and empty states */
+.student-table .ant-table-placeholder {
+    padding: 48px 16px;
+    background: #fafafa;
+}
+
+.student-table .ant-table-placeholder .ant-empty-description {
+    color: #666;
+}
+
+/* Animation for table rows */
+.student-table .ant-table-tbody > tr {
+    transition: all 0.3s ease;
+}
+
+.student-table .ant-table-tbody > tr:hover {
+    transform: translateY(-2px);
+}
+
+/* Footer styling */
+.student-footer {
+    text-align: center;
+    background-color: #f3f3f3;
+    color: rgb(0, 0, 0);
+}
+
+/* Action buttons */
+.edit-button:hover {
+    background-color: #1890ff;
+    border-color: #1890ff;
+    box-shadow: 0 2px 5px rgba(24, 144, 255, 0.3);
+}
+
+.delete-button:hover {
+    background-color: #ff4d4f;
+    border-color: #ff4d4f;
+    box-shadow: 0 2px 5px rgba(255, 77, 79, 0.3);
+}
+
+/* Modal and form styling */
+.student-modal .ant-modal-content {
+    border-radius: 8px;
+}
+
+.student-form .ant-form-item-label > label {
+    font-weight: 500;
+}
+
+.student-form input {
+    border-radius: 4px;
+}
