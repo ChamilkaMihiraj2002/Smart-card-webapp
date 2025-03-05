@@ -23,14 +23,65 @@ const Login = () => {
         // Set the default Authorization header for future requests
         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;
         
-        message.success('Login successful!');
+        message.success({
+          content: 'Login successful!',
+          duration: 3,
+          style: {
+            marginTop: '20vh',
+          },
+        });
         navigate('/dashboard');
       } else {
-        message.error('Login failed. Invalid response from server.');
+        message.error({
+          content: 'Login failed. Please check your credentials.',
+          duration: 4,
+          style: {
+            marginTop: '20vh',
+          },
+        });
       }
     } catch (error) {
       console.error('Login error:', error);
-      message.error(error.response?.data?.message || 'Login failed. Please try again.');
+      
+      // Handle specific error cases
+      if (error.response) {
+        switch (error.response.status) {
+          case 401:
+            message.error({
+              content: 'Invalid username or password',
+              duration: 4,
+              style: {
+                marginTop: '20vh',
+              },
+            });
+            break;
+          case 404:
+            message.error({
+              content: 'User not found',
+              duration: 4,
+              style: {
+                marginTop: '20vh',
+              },
+            });
+            break;
+          default:
+            message.error({
+              content: error.response.data?.message || 'An error occurred during login',
+              duration: 4,
+              style: {
+                marginTop: '20vh',
+              },
+            });
+        }
+      } else {
+        message.error({
+          content: 'Network error. Please check your connection.',
+          duration: 4,
+          style: {
+            marginTop: '20vh',
+          },
+        });
+      }
     }
   };
 

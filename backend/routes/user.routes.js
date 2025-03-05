@@ -6,10 +6,11 @@ const { authenticateToken } = require('../middleware/auth.middleware.js');
 router.post('/login', userController.login);
 
 router.get('/', authenticateToken, userController.getUsers);
+router.get('/count', authenticateToken, userController.getUserCount);
 router.get('/:userId', authenticateToken, userController.getUser);
-router.post('/', authenticateToken, userController.addUser);
+router.post('/', userController.addUser);
 router.put('/:userId', authenticateToken, userController.updateUser);
 router.delete('/:userId', authenticateToken, userController.deleteUser);
-router.get('/count', authenticateToken, userController.getUserCount);
+
 
 module.exports = router;

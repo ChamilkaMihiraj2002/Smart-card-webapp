@@ -21,11 +21,12 @@ const Registration = () => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+      
 
       const data = await response.json();
       message.success('Registration successful!');
       form.resetFields();
-      navigate('/dashboard');
+      navigate('/login');
     } catch (error) {
       console.error('Registration error:', error);
       message.error('Registration failed. Please try again.');

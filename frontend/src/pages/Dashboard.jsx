@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Layout, Card, Row, Col, Statistic, Image } from "antd"; // Add Image import
+import React, { useState, useEffect } from "react"; // Add useEffect
+import { Layout, Card, Row, Col, Statistic, Image } from "antd";
 import { 
   UserOutlined, 
   TeamOutlined, 
@@ -14,10 +14,48 @@ const { Header, Content, Footer } = Layout;
 const Dashboard = () => {
   const [currentDate] = useState(new Date().toLocaleDateString());
   const [stats, setStats] = useState({
-    studentCount: 150,
-    classCount: 10,
-    userCount: 200
+    studentCount: 0,
+    classCount: 0,
+    userCount: 0
   });
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          console.error('No token found');
+          return;
+        }
+
+        const headers = {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        };
+
+        // Fetch all stats in parallel
+        const [studentsRes, classesRes, usersRes] = await Promise.all([
+          fetch('http://localhost:3000/api/students/count', { headers }),
+          fetch('http://localhost:3000/api/classes/count', { headers }),
+          fetch('http://localhost:3000/api/users/count', { headers })
+        ]);
+
+        const studentData = await studentsRes.json();
+        const classData = await classesRes.json();
+        const userData = await usersRes.json();
+
+        setStats({
+          studentCount: studentData.count,
+          classCount: classData.count,
+          userCount: userData.count
+        });
+      } catch (error) {
+        console.error('Error fetching stats:', error);
+      }
+    };
+
+    fetchStats();
+  }, []); // Empty dependency array means this runs once when component mounts
 
   return (
     <Layout className="dashboard-container">

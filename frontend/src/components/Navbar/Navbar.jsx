@@ -35,8 +35,7 @@ const Navbar = () => {
 
   const handleClick = ({ key }) => {
     if (key === 'logout') {
-      // Add your logout logic here
-      // For example: clear localStorage, reset auth state, etc.
+      localStorage.clear();
       navigate('/login');
       return;
     }
