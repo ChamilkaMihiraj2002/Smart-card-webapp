@@ -1,44 +1,137 @@
-.navbar {
+/* Add these new styles at the beginning of the file */
+.navbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+}
+
+.nav-right {
+  margin-left: auto;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 0 50px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  height: 64px;
+}
+
+.navbar-scrolled {
+  padding: 0 50px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .navbar-logo {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.logo-animation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+  border-radius: 8px;
+  padding: 8px;
+  transition: transform 0.3s ease;
+}
+
+.logo-animation:hover {
+  transform: rotate(15deg);
 }
 
 .logo-icon {
   font-size: 24px;
-  color: #1890ff;
+  color: #ffffff;
 }
 
 .logo-text {
-  font-size: 20px;
-  font-weight: bold;
-  color: #001529;
+  margin: 0 !important;
+  color: #001529 !important;
+  transition: transform 0.3s ease;
+  white-space: nowrap;
+  font-size: 20px !important;
+}
+
+.logo-text-highlight {
+  color: #1890ff;
+  font-weight: 700;
+}
+
+.navbar-logo:hover .logo-text {
+  transform: translateX(5px);
 }
 
 .auth-buttons {
   display: flex;
-  gap: 12px;
+  gap: 16px;
+}
+
+.signin-btn {
+  border: none;
+  padding: 6px 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.signin-btn:hover {
+  color: #1890ff !important;
+  transform: translateY(-2px);
+}
+
+.register-btn {
+  padding: 6px 24px;
+  height: auto;
+  border-radius: 6px;
+  font-weight: 500;
+  background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.register-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
 }
 
 @media (max-width: 576px) {
+  .navbar-container {
+    padding: 0 10px;
+  }
+  
   .navbar {
-    padding: 0 20px;
+    padding: 0 15px;
   }
-  
+
   .logo-text {
-    font-size: 16px;
+    font-size: 16px !important;
   }
   
-  .auth-buttons button {
+  .auth-buttons {
+    gap: 8px;
+  }
+  
+  .signin-btn,
+  .register-btn {
     padding: 4px 12px;
+  }
+  
+  .logo-animation {
+    padding: 6px;
   }
 }
