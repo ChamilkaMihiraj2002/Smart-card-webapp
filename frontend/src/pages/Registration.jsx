@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Input, Button, Card, message } from 'antd';
 import { UserOutlined, LockOutlined, MailOutlined, IdcardOutlined, FormOutlined } from '@ant-design/icons';
+import Navbar from '../components/LoginAndRegister/Navbar';
 import { useNavigate } from 'react-router-dom';
 import './Registration.css';
 
@@ -34,6 +35,8 @@ const Registration = () => {
   };
 
   return (
+    <div>
+      <Navbar />
     <div className="registration-container">
       <Card 
         title={
@@ -130,6 +133,7 @@ const Registration = () => {
           </Form.Item>
         </Form>
       </Card>
+    </div>
     </div>
   );
 };
