@@ -5,7 +5,7 @@ const { authenticateToken } = require('../middleware/auth.middleware.js');
 
 router.get('/', authenticateToken, classController.getClasses);
 router.get('/count', authenticateToken, classController.getClassCount);
-router.get('/day/:weekday', authenticateToken, classController.getClassesByWeekday);
+router.get('/day/:weekday', authenticateToken, classController.getClassWeekday);
 router.get('/:classId', authenticateToken, classController.getClass);
 router.post('/', authenticateToken, classController.addClass);
 router.put('/:classId', authenticateToken, classController.updateClass);

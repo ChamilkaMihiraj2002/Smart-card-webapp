@@ -38,9 +38,11 @@ const StudentForm = ({ visible, onCancel, onSave, student }) => {
         className="student-form"
       >
         <Form.Item
-          name="studentId"
+          name="stId"
           label="Student ID"
-          rules={[{ required: true, message: 'Please input student ID!' }]}
+          rules={[
+            { required: true, message: 'Please input student ID!' },
+          ]}
         >
           <Input />
         </Form.Item>
@@ -54,21 +56,23 @@ const StudentForm = ({ visible, onCancel, onSave, student }) => {
         <Form.Item
           name="age"
           label="Age"
-          rules={[{ required: true, message: 'Please input student age!' }]}
         >
           <Input type="number" />
         </Form.Item>
         <Form.Item
-          name="class"
+          name="StudentClass"
           label="Class"
           rules={[{ required: true, message: 'Please input student class!' }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
-          name="mobileNumber"
+          name="mobile_number"
           label="Mobile Number"
-          rules={[{ required: true, message: 'Please input mobile number!' }]}
+          rules={[
+            { required: true, message: 'Please input mobile number!' },
+            { pattern: /^\d{10}$/, message: 'Please enter a valid 10-digit mobile number!' }
+          ]}
         >
           <Input />
         </Form.Item>

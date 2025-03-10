@@ -13,7 +13,7 @@ const StudentActions = ({ student, onEdit, onDelete }) => {
       </Button>
       <Popconfirm
         title="Are you sure you want to delete this student?"
-        onConfirm={() => onDelete(student.studentId)}
+        onConfirm={() => onDelete(student.stId)}
         okText="Yes"
         cancelText="No"
       >
