@@ -41,6 +41,22 @@ const getClass = async (req, res) => {
     }
 }
 
+const getClassWeekday = async (req, res) => {
+    try {
+        const { weekday } = req.params;
+        const classes = await Class.find({ weekday });
+
+        if (!classes) {
+            return res.status(404).json({ message: `Classs not found with weekday: ${weekday}` });
+        }
+
+        res.status(200).json(classes);
+    } catch (error) {
+        console.error("Error fetching student:", error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
 const updateClass = async (req, res) => {
     try {
         const { classId } = req.params;
@@ -92,5 +108,6 @@ module.exports = {
     getClass,
     updateClass,
     deleteClass,
-    getClassCount
+    getClassCount,
+    getClassWeekday
 };

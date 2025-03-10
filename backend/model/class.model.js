@@ -20,6 +20,16 @@ const classSchema = mongoose.Schema (
             required: [true, 'Time is required'],
         },
 
+        subject: {
+            type: String,
+            required: [true, 'Subject is required'],
+        },
+
+        weekday: {
+            type: String,
+            required: [true, 'Weekday is required'],
+        },
+
     }
 );
 
