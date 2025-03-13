@@ -1,6 +1,6 @@
 .layout {
     min-height: 100vh;
-  }
+}
   
 .content {
     padding: 24px;
@@ -12,16 +12,21 @@
     margin-top: 20px;
     background: white;
     border-radius: 8px;
+    overflow-x: auto; /* Add horizontal scroll for small screens */
 }
   
 .footer {
     text-align: center;
+    padding: 1rem;
 }
 
 .ant-card {
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03),
                 0 1px 6px -1px rgba(0, 0, 0, 0.02),
                 0 2px 4px 0 rgba(0, 0, 0, 0.02);
+    margin: 0 auto;
+    max-width: 1500px;
+    width: 100%;
 }
 
 .ant-table-thead > tr > th {
@@ -31,4 +36,68 @@
 
 .ant-space {
     width: 100%;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .content {
+        padding: 12px;
+    }
+
+    .ant-card {
+        margin: 0;
+    }
+
+    /* Adjust table columns for mobile */
+    .ant-table {
+        font-size: 14px;
+    }
+
+    /* Stack action buttons on mobile */
+    .ant-space-vertical {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    /* Further adjustments for very small screens */
+    .content {
+        padding: 8px;
+    }
+
+    /* Make modal responsive */
+    .ant-modal {
+        max-width: 95%;
+        margin: 10px;
+    }
+
+    /* Adjust form items spacing */
+    .ant-form-item {
+        margin-bottom: 12px;
+    }
+
+    /* Make buttons full width on mobile */
+    .ant-btn {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+}
+
+/* Print styles */
+@media print {
+    .ant-btn,
+    .ant-modal,
+    .header {
+        display: none;
+    }
+
+    .content {
+        padding: 0;
+    }
+
+    .ant-card {
+        box-shadow: none;
+    }
 }
