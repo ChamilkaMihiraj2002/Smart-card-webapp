@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Layout, Table, Button, Modal, Form, Input, Card, Space, Typography, message, Select } from 'antd';
 import { UserOutlined, ClockCircleOutlined, PlusOutlined, EditOutlined, DeleteOutlined, BookOutlined, CalendarOutlined } from '@ant-design/icons';
 import Navbar from "../../Navbar/Navbar.jsx";
-import './Class.css';
 import { useNavigate } from 'react-router-dom';
+import styles from './Class.module.css';
 
 const { Header, Content, Footer } = Layout;
 const { Title } = Typography;
@@ -250,11 +250,11 @@ const Class = () => {
   const [form] = Form.useForm();
 
   return (
-    <Layout className="layout">
+    <Layout className={styles.layout}>
       <Header>
         <Navbar />
       </Header>
-      <Content className="content">
+      <Content className={styles.content}>
         <Card>
           <Space direction="vertical" style={{ width: '100%' }}>
             <Button 
@@ -271,14 +271,14 @@ const Class = () => {
               columns={columns} 
               rowKey="_id" 
               loading={loading}
-              className="table"
+              className={styles.table}
               bordered
               pagination={{ pageSize: 5 }}
             />
           </Space>
         </Card>
       </Content>
-      <Footer className="footer">
+      <Footer className={styles.footer}>
         Class Management Dashboard ©2025 Created with Ant Design
       </Footer>
       <Modal

@@ -5,7 +5,7 @@ import Navbar from "../../Navbar/Navbar.jsx";
 import StudentForm from './StudentForm';
 import StudentActions from './StudentActions';
 import axios from 'axios';
-import './Students.css';
+import style from './Students.module.css';
 
 const { Header, Content, Footer } = Layout;
 
@@ -166,19 +166,18 @@ const Students = () => {
   ];
 
   return (
-    <Layout className="student-layout">
+    <Layout className={style.studentLayout}>
       <Header>
         <Navbar />
       </Header>
-      <Content className="student-content">
-        <div className="action-bar">
+      <Content className={style.studentContent}>
+        <div className={style.actionBar}>
           <Button type="primary" onClick={handleAdd} icon={<PlusOutlined />}>
             Add New Student
           </Button>
-          {/* You can add more action buttons here */}
         </div>
         <Table 
-          className="student-table"
+          className={style.studentTable}
           columns={columns} 
           dataSource={students}
           loading={loading}
@@ -201,7 +200,7 @@ const Students = () => {
           student={editingStudent}
         />
       </Content>
-      <Footer className="student-footer">
+      <Footer className={style.studentFooter}>
         Student Dashboard ©2025 Created with Ant Design
       </Footer>
     </Layout>
