@@ -1,0 +1,218 @@
+.feesLayout {
+    min-height: 100vh;
+    background-color: #f0f2f5;
+}
+
+.feesContent {
+    padding: 32px;
+    background: linear-gradient(135deg, #f0f2f5 0%, #ffffff 100%);
+    min-height: calc(100vh - 64px - 70px);
+}
+
+.feesHeader {
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+}
+
+.feesHeader h1 {
+    font-size: 28px;
+    color: #1a1a1a;
+    margin: 0;
+    font-weight: 600;
+    background: linear-gradient(90deg, #1890ff, #69c0ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Update the grid columns to make cards smaller */
+.feesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    padding: 12px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Make the card more compact */
+.feeCard {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.feeCard:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    border-color: #1890ff;
+}
+
+.cardContent {
+    padding: 12px 16px;
+}
+
+.feeAmount {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1890ff;
+    margin: 8px 0;
+}
+
+.feeDueDate {
+    color: #ff4d4f;
+    font-weight: 500;
+    margin: 8px 0;
+}
+
+.feeStatus {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 12px;
+}
+
+.statusPaid {
+    background-color: #f6ffed;
+    color: #52c41a;
+    border: 1px solid #b7eb8f;
+}
+
+.statusPending {
+    background-color: #fffbe6;
+    color: #faad14;
+    border: 1px solid #ffe58f;
+}
+
+.statusOverdue {
+    background-color: #fff2f0;
+    color: #ff4d4f;
+    border: 1px solid #ffccc7;
+}
+
+/* Make card actions more compact */
+.cardActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 8px 12px;
+    background-color: #fafafa;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* Adjust buttons */
+.editButton,
+.deleteButton {
+    padding: 4px 8px;
+    height: 32px;
+    font-size: 14px;
+}
+
+.editButton:hover {
+    background-color: #1890ff;
+    color: white;
+    box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
+}
+
+.deleteButton {
+    background-color: #ffffff;
+    border: 1px solid #ff4d4f;
+    color: #ff4d4f;
+    transition: all 0.3s ease;
+}
+
+.deleteButton:hover {
+    background-color: #ff4d4f;
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 77, 79, 0.3);
+}
+
+.addButton {
+    height: 44px;
+    padding: 0 32px;
+    font-weight: 500;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #1890ff, #69c0ff);
+    border: none;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.addButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(24, 144, 255, 0.4);
+}
+
+.feesFooter {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 24px;
+    color: #666;
+    font-size: 14px;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* Adjust text sizes */
+.classId {
+    font-size: 14px;
+    color: #666;
+    margin: 4px 0;
+}
+
+/* Adjust text sizes */
+.feeMonth {
+    font-size: 14px;
+    color: #1890ff;
+    font-weight: 500;
+    margin: 4px 0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Update responsive design */
+@media (max-width: 768px) {
+    .feesContent {
+        padding: 16px;
+    }
+    
+    .feesGrid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 12px;
+    }
+
+    .feesHeader {
+        flex-direction: column;
+        gap: 16px;
+        align-items: stretch;
+    }
+
+    .addButton {
+        width: 100%;
+    }
+
+    .feeCard {
+        margin: 0 4px;
+    }
+    
+    .cardContent {
+        padding: 10px 12px;
+    }
+}
