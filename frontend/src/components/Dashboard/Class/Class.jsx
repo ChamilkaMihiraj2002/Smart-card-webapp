@@ -266,13 +266,12 @@ const Class = () => {
       </Header>
       <Content className={styles.content}>
         <Card>
-          <Space direction="vertical" style={{ width: '100%' }}>
+          <Space direction="horizontal" style={{ width: '100%', justifyContent: 'space-between', marginBottom: '16px' }}>
             <Button 
               type="primary" 
               icon={<PlusOutlined />} 
               onClick={() => showModal(null)}
               size="large"
-              style={{ marginBottom: '16px' }}
             >
               Add New Class
             </Button>
@@ -280,18 +279,18 @@ const Class = () => {
               placeholder="Search classes..."
               allowClear
               onChange={(e) => setSearchText(e.target.value)}
-              style={{ marginBottom: '16px', width: '300px' }}
-            />
-            <Table 
-              dataSource={filteredClasses} // Changed from classes to filteredClasses
-              columns={columns} 
-              rowKey="_id" 
-              loading={loading}
-              className={styles.table}
-              bordered
-              pagination={{ pageSize: 5 }}
+              style={{ width: '300px' }}
             />
           </Space>
+          <Table 
+            dataSource={filteredClasses} // Changed from classes to filteredClasses
+            columns={columns} 
+            rowKey="_id" 
+            loading={loading}
+            className={styles.table}
+            bordered
+            pagination={{ pageSize: 5 }}
+          />
         </Card>
       </Content>
       <Footer className={styles.footer}>

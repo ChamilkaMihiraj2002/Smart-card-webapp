@@ -15,9 +15,11 @@ function App() {
     <>
      <Router>
       <Routes>
+        {/* Make login the default route */}
+        <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
-        <Route path="*" element={<Navigate to="/login" />} />
-
+        
+        {/* Protected Routes */}
         <Route path="/registration" element={<Registration />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/students" element={<Students />} />
@@ -27,6 +29,9 @@ function App() {
         <Route path="/accounting" element={<Accounting />} />
         <Route path="/user" element={<User />} />
         <Route path="/" element={<Dashboard />} />
+
+        {/* Redirect all unknown routes to login */}
+        <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </Router>
     </>

@@ -27,24 +27,88 @@
     -webkit-text-fill-color: transparent;
 }
 
-/* Update the grid columns to make cards smaller */
+/* Action Bar Styling - Improved */
+.actionBar {
+    margin-bottom: 24px;
+    padding: 18px 24px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    border: none;
+}
+
+.actionBarControls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.searchWrapper {
+    flex-grow: 0;
+    max-width: 400px;
+}
+
+.searchInput {
+    width: 350px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e6e6e6;
+}
+
+.searchInput:hover {
+    border-color: #40a9ff;
+    box-shadow: 0 2px 8px rgba(24, 144, 255, 0.15);
+}
+
+.buttonWrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.actionButton {
+    height: 42px;
+    padding: 0 24px;
+    font-weight: 600;
+    border-radius: 8px;
+    background: linear-gradient(145deg, #2979ff, #1565c0);
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(24, 144, 255, 0.15);
+}
+
+.actionButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(41, 121, 255, 0.25);
+    background: linear-gradient(145deg, #2979ff, #1976d2);
+}
+
+.actionButton:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(41, 121, 255, 0.2);
+}
+
+/* Fee Cards Grid */
 .feesGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px;
-    padding: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 12px 4px;
     animation: fadeIn 0.5s ease-out;
 }
 
-/* Make the card more compact */
 .feeCard {
     background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid rgba(0, 0, 0, 0.06);
     overflow: hidden;
-    max-width: 100%;
 }
 
 .feeCard:hover {
@@ -53,66 +117,81 @@
     border-color: #1890ff;
 }
 
+.cardTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 4px;
+}
+
+.userIcon {
+    font-size: 20px;
+    color: #1890ff;
+    transition: all 0.3s ease;
+    background: #f0f7ff;
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.userIcon:hover {
+    transform: scale(1.1);
+    color: #40a9ff;
+}
+
 .cardContent {
-    padding: 12px 16px;
+    padding: 16px 20px;
+}
+
+.cardContent h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #262626;
 }
 
 .feeAmount {
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 24px;
+    font-weight: 700;
     color: #1890ff;
-    margin: 8px 0;
+    margin: 12px 0;
 }
 
-.feeDueDate {
-    color: #ff4d4f;
+.classId {
+    font-size: 14px;
+    color: #666;
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+}
+
+.feeMonth {
+    font-size: 14px;
+    color: #1890ff;
     font-weight: 500;
     margin: 8px 0;
-}
-
-.feeStatus {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    background-color: #f0f7ff;
     padding: 4px 12px;
     border-radius: 16px;
-    font-size: 14px;
-    font-weight: 500;
-    margin-top: 12px;
+    display: inline-block;
 }
 
-.statusPaid {
-    background-color: #f6ffed;
-    color: #52c41a;
-    border: 1px solid #b7eb8f;
-}
-
-.statusPending {
-    background-color: #fffbe6;
-    color: #faad14;
-    border: 1px solid #ffe58f;
-}
-
-.statusOverdue {
-    background-color: #fff2f0;
-    color: #ff4d4f;
-    border: 1px solid #ffccc7;
-}
-
-/* Make card actions more compact */
-.cardActions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 8px;
-    padding: 8px 12px;
-    background-color: #fafafa;
-    border-top: 1px solid #f0f0f0;
-}
-
-/* Adjust buttons */
+/* Button styling */
 .editButton,
 .deleteButton {
-    padding: 4px 8px;
-    height: 32px;
-    font-size: 14px;
+    border: none;
+    align-items: center;;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.editButton {
+    background-color: #e6f7ff;
+    color: #1890ff;
 }
 
 .editButton:hover {
@@ -122,10 +201,8 @@
 }
 
 .deleteButton {
-    background-color: #ffffff;
-    border: 1px solid #ff4d4f;
+    background-color: #fff1f0;
     color: #ff4d4f;
-    transition: all 0.3s ease;
 }
 
 .deleteButton:hover {
@@ -134,46 +211,13 @@
     box-shadow: 0 4px 12px rgba(255, 77, 79, 0.3);
 }
 
-.addButton {
-    height: 44px;
-    padding: 0 32px;
-    font-weight: 500;
-    border-radius: 8px;
-    background: linear-gradient(45deg, #1890ff, #69c0ff);
-    border: none;
-    color: white;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-    box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
-    transition: all 0.3s ease;
-}
-
-.addButton:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(24, 144, 255, 0.4);
-}
-
 .feesFooter {
     text-align: center;
     background-color: #ffffff;
-    padding: 24px;
+    padding: 20px;
     color: #666;
     font-size: 14px;
     box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.06);
-}
-
-/* Adjust text sizes */
-.classId {
-    font-size: 14px;
-    color: #666;
-    margin: 4px 0;
-}
-
-/* Adjust text sizes */
-.feeMonth {
-    font-size: 14px;
-    color: #1890ff;
-    font-weight: 500;
-    margin: 4px 0;
 }
 
 @keyframes fadeIn {
@@ -187,76 +231,43 @@
     }
 }
 
-/* Update responsive design */
+/* Responsive Styling */
+@media (max-width: 992px) {
+    .feesGrid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+
 @media (max-width: 768px) {
     .feesContent {
         padding: 16px;
     }
     
-    .feesGrid {
-        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-        gap: 12px;
-    }
-
-    .feesHeader {
+    .actionBarControls {
         flex-direction: column;
-        gap: 16px;
         align-items: stretch;
-    }
-
-    .addButton {
-        width: 100%;
-    }
-
-    .feeCard {
-        margin: 0 4px;
+        gap: 16px;
     }
     
-    .cardContent {
-        padding: 10px 12px;
+    .searchWrapper {
+        max-width: 100%;
     }
-
-    .headerActions {
-        flex-direction: column;
-        width: 100%;
-    }
-
+    
     .searchInput {
+        width: 100% !important;
+    }
+    
+    .buttonWrapper {
         width: 100%;
     }
-}
-
-.cardTitle {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.userIcon {
-    font-size: 18px;
-    color: #1890ff;
-    transition: all 0.3s ease;
-}
-
-.userIcon:hover {
-    transform: scale(1.1);
-    color: #40a9ff;
-}
-
-.headerActions {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-}
-
-.searchInput {
-    width: 250px;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-}
-
-.searchInput:hover,
-.searchInput:focus {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    
+    .actionButton {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .feesGrid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
 }

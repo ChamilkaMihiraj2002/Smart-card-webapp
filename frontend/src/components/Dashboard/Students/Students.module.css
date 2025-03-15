@@ -15,23 +15,45 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
-    padding: 16px;
-    background: #fff;
-    border-radius: 4px;
+    margin-top: 20px;
+    margin-bottom: 24px;
+    padding: 20px 24px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(231, 231, 231, 0.8);
+    transition: all 0.3s ease;
+}
+
+.actionBar:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
 }
 
 .actionButton {
     transition: all 0.3s ease;
-    height: 40px;
-    padding: 0 24px;
-    font-weight: 500;
-    border-radius: 6px;
+    height: 42px;
+    padding: 0 28px;
+    font-weight: 600;
+    border-radius: 8px;
+    background: linear-gradient(145deg, #2979ff, #1565c0);
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .actionButton:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 16px rgba(41, 121, 255, 0.25);
+    background: linear-gradient(145deg, #2979ff, #1976d2);
+}
+
+.actionButton:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(41, 121, 255, 0.2);
 }
 
 /* Table styling */
@@ -58,6 +80,10 @@
 .tableRow:hover {
     background-color: #f8f9ff;
     transform: translateY(-2px);
+}
+
+.tablePagination {
+    padding-right: 20px;
 }
 
 /* Action buttons */

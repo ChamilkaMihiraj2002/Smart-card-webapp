@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Layout, Card, Button, Modal, Form, Input, InputNumber, Select, message } from "antd";
-import { EditOutlined, DeleteOutlined, PlusOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, PlusOutlined, UserOutlined } from '@ant-design/icons';
 import Navbar from "../../Navbar/Navbar.jsx";
 import axios from 'axios';
 import style from './Fees.module.css';
@@ -51,13 +51,23 @@ const Fees = () => {
 
   const handleEdit = (fee) => {
     setEditingFee(fee);
-    form.setFieldsValue(fee);
+    form.setFieldsValue({
+      classId: fee.classId,
+      stId: fee.stId,
+      amount: fee.amount,
+      month: fee.month,
+      // Save the id separately to ensure it's available
+      id: fee.id
+    });
     setIsModalVisible(true);
   };
 
-  const handleDelete = async (feeId) => {
+  const handleDelete = async (fee) => {
     try {
-      await axios.delete(`http://localhost:3000/api/fees/${feeId}`, config);
+      await axios.delete(
+        `http://localhost:3000/api/fees/${fee.stId}/${fee.classId}/${fee.month}`, 
+        config
+      );
       message.success('Fee deleted successfully');
       fetchFees();
     } catch (error) {
@@ -76,12 +86,25 @@ const Fees = () => {
       };
 
       if (editingFee) {
-        await axios.put(
-          `http://localhost:3000/api/fees/${editingFee.id}`,
-          feeData,
-          config
-        );
-        message.success('Fee updated successfully');
+        // Workaround: Delete the old entry and create a new one
+        try {
+          await axios.delete(
+            `http://localhost:3000/api/fees/${editingFee.stId}/${editingFee.classId}/${editingFee.month}`, 
+            config
+          );
+          
+          // Then create a new entry
+          await axios.post(
+            'http://localhost:3000/api/fees',
+            feeData,
+            config
+          );
+          
+          message.success('Fee updated successfully');
+        } catch (deleteError) {
+          console.error('Error during update workaround:', deleteError);
+          message.error('Failed to update fee');
+        }
       } else {
         await axios.post(
           'http://localhost:3000/api/fees',
@@ -100,9 +123,9 @@ const Fees = () => {
   };
 
   const filteredFees = fees.filter(fee => 
-    fee.stId.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    fee.classId.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    fee.month.toLowerCase().includes(searchQuery.toLowerCase())
+    fee.stId?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    fee.classId?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    fee.month?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -111,26 +134,29 @@ const Fees = () => {
         <Navbar />
       </Header>
       <Content className={style.feesContent}>
-        <div className={style.feesHeader}>
-          <h1>Fees Management</h1>
-          <div className={style.headerActions}>
-            <Input
-              placeholder="Search by ID or Month"
-              prefix={<SearchOutlined />}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className={style.searchInput}
-              allowClear
-            />
-            <Button
-              type="primary"
-              icon={<PlusOutlined />}
-              onClick={handleAdd}
-              className={style.addButton}
-            >
-              Add New Fee
-            </Button>
+        <Card className={style.actionBar}>
+          <div className={style.actionBarControls}>
+            <div className={style.searchWrapper}>
+              <Input.Search
+                placeholder="Search by student ID, class, or month"
+                allowClear
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className={style.searchInput}
+              />
+            </div>
+            <div className={style.buttonWrapper}>
+              <Button
+                type="primary"
+                icon={<PlusOutlined />}
+                onClick={handleAdd}
+                className={style.actionButton}
+              >
+                Add New Fee
+              </Button>
+            </div>
           </div>
-        </div>
+        </Card>
+        
         <div className={style.feesGrid}>
           {filteredFees.map(fee => (
             <Card
@@ -138,7 +164,7 @@ const Fees = () => {
               className={style.feeCard}
               title={
                 <div className={style.cardTitle}>
-                  <span>{fee.feeName}</span>
+                  <span>Fee Details</span>
                   <UserOutlined className={style.userIcon} />
                 </div>
               }
@@ -152,7 +178,7 @@ const Fees = () => {
                 <Button
                   key="delete"
                   icon={<DeleteOutlined />}
-                  onClick={() => handleDelete(fee.id)}
+                  onClick={() => handleDelete(fee)}  // Pass the complete fee object instead of just fee.id
                   className={style.deleteButton}
                 />
               ]}
@@ -160,7 +186,7 @@ const Fees = () => {
               <div className={style.cardContent}>
                 <h3>Student ID: {fee.stId}</h3>
                 <div className={style.classId}>Class ID: {fee.classId}</div>
-                <div className={style.feeAmount}>${fee.amount}</div>
+                <div className={style.feeAmount}>Rs. {fee.amount}</div>
                 <div className={style.feeMonth}>Month: {fee.month}</div>
               </div>
             </Card>

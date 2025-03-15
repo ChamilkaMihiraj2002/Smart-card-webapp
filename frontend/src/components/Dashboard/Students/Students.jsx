@@ -198,7 +198,8 @@ const Students = () => {
             pageSize: 10,
             showSizeChanger: true,
             showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
-            responsive: true
+            responsive: true,
+            className: style.tablePagination // Add this line
           }}
           scroll={{ x: true }}
           locale={{
