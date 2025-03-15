@@ -215,4 +215,48 @@
     .cardContent {
         padding: 10px 12px;
     }
+
+    .headerActions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .searchInput {
+        width: 100%;
+    }
+}
+
+.cardTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.userIcon {
+    font-size: 18px;
+    color: #1890ff;
+    transition: all 0.3s ease;
+}
+
+.userIcon:hover {
+    transform: scale(1.1);
+    color: #40a9ff;
+}
+
+.headerActions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.searchInput {
+    width: 250px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.searchInput:hover,
+.searchInput:focus {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }

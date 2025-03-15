@@ -12,12 +12,13 @@
 
 /* Action bar with add button */
 .actionBar {
-    margin-bottom: 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
+    margin-bottom: 16px;
+    padding: 16px;
+    background: #fff;
+    border-radius: 4px;
 }
 
 .actionButton {

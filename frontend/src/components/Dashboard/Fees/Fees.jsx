@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Layout, Card, Button, Modal, Form, Input, InputNumber, Select, message } from "antd";
-import { EditOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, PlusOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons';
 import Navbar from "../../Navbar/Navbar.jsx";
 import axios from 'axios';
 import style from './Fees.module.css';
@@ -13,6 +13,7 @@ const Fees = () => {
   const [editingFee, setEditingFee] = useState(null);
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const token = localStorage.getItem('token');
   const config = {
@@ -98,6 +99,12 @@ const Fees = () => {
     }
   };
 
+  const filteredFees = fees.filter(fee => 
+    fee.stId.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    fee.classId.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    fee.month.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <Layout className={style.feesLayout}>
       <Header>
@@ -106,21 +113,35 @@ const Fees = () => {
       <Content className={style.feesContent}>
         <div className={style.feesHeader}>
           <h1>Fees Management</h1>
-          <Button
-            type="primary"
-            icon={<PlusOutlined />}
-            onClick={handleAdd}
-            className={style.addButton}
-          >
-            Add New Fee
-          </Button>
+          <div className={style.headerActions}>
+            <Input
+              placeholder="Search by ID or Month"
+              prefix={<SearchOutlined />}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className={style.searchInput}
+              allowClear
+            />
+            <Button
+              type="primary"
+              icon={<PlusOutlined />}
+              onClick={handleAdd}
+              className={style.addButton}
+            >
+              Add New Fee
+            </Button>
+          </div>
         </div>
         <div className={style.feesGrid}>
-          {fees.map(fee => (
+          {filteredFees.map(fee => (
             <Card
               key={fee.id}
               className={style.feeCard}
-              title={fee.feeName}
+              title={
+                <div className={style.cardTitle}>
+                  <span>{fee.feeName}</span>
+                  <UserOutlined className={style.userIcon} />
+                </div>
+              }
               actions={[
                 <Button
                   key="edit"

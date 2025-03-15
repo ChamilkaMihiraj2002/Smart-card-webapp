@@ -14,6 +14,7 @@ const Class = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [editingClass, setEditingClass] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [searchText, setSearchText] = useState('');
   const navigate = useNavigate();
 
   // Add function to get auth headers
@@ -247,6 +248,15 @@ const Class = () => {
     },
   ];
 
+  // Add this before the return statement
+  const filteredClasses = classes.filter(classItem => 
+    classItem.classId.toLowerCase().includes(searchText.toLowerCase()) ||
+    classItem.teacher.toLowerCase().includes(searchText.toLowerCase()) ||
+    classItem.subject.toLowerCase().includes(searchText.toLowerCase()) ||
+    classItem.weekday.toLowerCase().includes(searchText.toLowerCase()) ||
+    classItem.time.toLowerCase().includes(searchText.toLowerCase())
+  );
+
   const [form] = Form.useForm();
 
   return (
@@ -266,8 +276,14 @@ const Class = () => {
             >
               Add New Class
             </Button>
+            <Input.Search
+              placeholder="Search classes..."
+              allowClear
+              onChange={(e) => setSearchText(e.target.value)}
+              style={{ marginBottom: '16px', width: '300px' }}
+            />
             <Table 
-              dataSource={classes} 
+              dataSource={filteredClasses} // Changed from classes to filteredClasses
               columns={columns} 
               rowKey="_id" 
               loading={loading}

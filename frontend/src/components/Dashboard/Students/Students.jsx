@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Table, Button, message } from "antd";
-import { PlusOutlined } from '@ant-design/icons';
+import { Layout, Table, Button, message, Input } from "antd"; // Add Input to imports
+import { PlusOutlined, SearchOutlined } from '@ant-design/icons'; // Add SearchOutlined
 import Navbar from "../../Navbar/Navbar.jsx";
 import StudentForm from './StudentForm';
 import StudentActions from './StudentActions';
@@ -14,6 +14,7 @@ const Students = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [editingStudent, setEditingStudent] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [searchText, setSearchText] = useState('');
 
   // Get auth token from localStorage
   const token = localStorage.getItem('token');
@@ -165,13 +166,25 @@ const Students = () => {
     },
   ];
 
+  const filteredStudents = students.filter(student => 
+    student.name.toLowerCase().includes(searchText.toLowerCase()) ||
+    student.stId.toString().toLowerCase().includes(searchText.toLowerCase())
+  );
+
   return (
     <Layout className={style.studentLayout}>
       <Header>
         <Navbar />
       </Header>
-      <Content className={style.studentContent}>
+      <Content style={{ padding: '0 50px' }} className={style.studentContent}>
         <div className={style.actionBar}>
+          <Input
+            placeholder="Search by name or ID"
+            prefix={<SearchOutlined />}
+            onChange={e => setSearchText(e.target.value)}
+            style={{ width: 200, marginRight: 16 }}
+            allowClear
+          />
           <Button type="primary" onClick={handleAdd} icon={<PlusOutlined />}>
             Add New Student
           </Button>
@@ -179,7 +192,7 @@ const Students = () => {
         <Table 
           className={style.studentTable}
           columns={columns} 
-          dataSource={students}
+          dataSource={filteredStudents} // Changed from students to filteredStudents
           loading={loading}
           pagination={{
             pageSize: 10,
@@ -192,7 +205,6 @@ const Students = () => {
             emptyText: 'No students found'
           }}
         />
-
         <StudentForm
           visible={isModalVisible}
           onCancel={() => setIsModalVisible(false)}
