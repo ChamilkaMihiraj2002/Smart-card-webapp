@@ -186,8 +186,6 @@ const Fees = () => {
                   description={
                     <div className={style.deleteDescription}>
                       Are you sure you want to delete this fee record for Student {fee.stId}?
-                      <br />
-                      This action cannot be undone.
                     </div>
                   }
                   onConfirm={() => handleDelete(fee)}
