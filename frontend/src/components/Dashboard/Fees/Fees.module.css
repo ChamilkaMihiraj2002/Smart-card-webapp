@@ -30,7 +30,7 @@
 /* Action Bar Styling - Improved */
 .actionBar {
     margin-bottom: 24px;
-    padding: 18px 24px;
+    padding: 10px 16px;
     background: white;
     border-radius: 10px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
@@ -93,12 +93,12 @@
     box-shadow: 0 2px 8px rgba(41, 121, 255, 0.2);
 }
 
-/* Fee Cards Grid */
+/* Fee Cards Grid - Modified for smaller cards */
 .feesGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 12px 4px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    padding: 10px 4px;
     animation: fadeIn 0.5s ease-out;
 }
 
@@ -109,12 +109,8 @@
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid rgba(0, 0, 0, 0.06);
     overflow: hidden;
-}
-
-.feeCard:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
-    border-color: #1890ff;
+    /* Add max-width to control card size */
+    max-width: 100%;
 }
 
 .cardTitle {
@@ -140,40 +136,40 @@
 }
 
 .cardContent {
-    padding: 16px 20px;
+    padding: 12px 16px;
 }
 
 .cardContent h3 {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     color: #262626;
 }
 
 .feeAmount {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
     color: #1890ff;
-    margin: 12px 0;
+    margin: 8px 0;
 }
 
 .classId {
-    font-size: 14px;
+    font-size: 12px;
     color: #666;
-    margin: 8px 0;
+    margin: 6px 0;
     display: flex;
     align-items: center;
 }
 
 .feeMonth {
-    font-size: 14px;
+    font-size: 12px;
     color: #1890ff;
     font-weight: 500;
-    margin: 8px 0;
+    margin: 6px 0;
     display: flex;
     align-items: center;
     background-color: #f0f7ff;
-    padding: 4px 12px;
+    padding: 3px 10px;
     border-radius: 16px;
     display: inline-block;
 }
@@ -183,8 +179,8 @@
 .deleteButton {
     border: none;
     align-items: center;;
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     transition: all 0.3s ease;
 }
@@ -234,7 +230,7 @@
 /* Responsive Styling */
 @media (max-width: 992px) {
     .feesGrid {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     }
 }
 
