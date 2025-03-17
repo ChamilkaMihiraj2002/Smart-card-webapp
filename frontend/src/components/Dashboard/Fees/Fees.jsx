@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Card, Button, Modal, Form, Input, InputNumber, Select, message } from "antd";
+import { Layout, Card, Button, Modal, Form, Input, InputNumber, Select, message, Popconfirm } from "antd";
 import { EditOutlined, DeleteOutlined, PlusOutlined, UserOutlined } from '@ant-design/icons';
 import Navbar from "../../Navbar/Navbar.jsx";
 import axios from 'axios';
@@ -175,12 +175,20 @@ const Fees = () => {
                   onClick={() => handleEdit(fee)}
                   className={style.editButton}
                 />,
-                <Button
+                <Popconfirm
                   key="delete"
-                  icon={<DeleteOutlined />}
-                  onClick={() => handleDelete(fee)}  // Pass the complete fee object instead of just fee.id
-                  className={style.deleteButton}
-                />
+                  title="Delete Fee"
+                  description="Are you sure you want to delete this fee record?"
+                  onConfirm={() => handleDelete(fee)}
+                  okText="Yes"
+                  cancelText="No"
+                >
+                  <Button
+                    key="delete"
+                    icon={<DeleteOutlined />}
+                    className={style.deleteButton}
+                  />
+                </Popconfirm>
               ]}
             >
               <div className={style.cardContent}>
