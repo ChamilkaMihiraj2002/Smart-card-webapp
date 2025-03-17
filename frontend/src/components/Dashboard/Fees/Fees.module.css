@@ -207,6 +207,31 @@
     box-shadow: 0 4px 12px rgba(255, 77, 79, 0.3);
 }
 
+/* New styles for delete confirmation popup */
+.deletePopconfirm :global(.ant-popover-inner) {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.deleteIcon {
+    font-size: 22px;
+    color: #ff4d4f;
+    margin-right: 8px;
+}
+
+.deleteTitle {
+    font-weight: 600;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    color: #ff4d4f;
+}
+
+.deleteDescription {
+    margin-top: 8px;
+    color: #595959;
+}
+
 .feesFooter {
     text-align: center;
     background-color: #ffffff;

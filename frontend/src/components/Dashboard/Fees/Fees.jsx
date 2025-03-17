@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Layout, Card, Button, Modal, Form, Input, InputNumber, Select, message, Popconfirm } from "antd";
-import { EditOutlined, DeleteOutlined, PlusOutlined, UserOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, PlusOutlined, UserOutlined, ExclamationCircleFilled } from '@ant-design/icons';
 import Navbar from "../../Navbar/Navbar.jsx";
 import axios from 'axios';
 import style from './Fees.module.css';
@@ -177,11 +177,35 @@ const Fees = () => {
                 />,
                 <Popconfirm
                   key="delete"
-                  title="Delete Fee"
-                  description="Are you sure you want to delete this fee record?"
+                  title={
+                    <div className={style.deleteTitle}>
+                      <ExclamationCircleFilled className={style.deleteIcon} />
+                      Delete Fee
+                    </div>
+                  }
+                  description={
+                    <div className={style.deleteDescription}>
+                      Are you sure you want to delete this fee record for Student {fee.stId}?
+                      <br />
+                      This action cannot be undone.
+                    </div>
+                  }
                   onConfirm={() => handleDelete(fee)}
-                  okText="Yes"
-                  cancelText="No"
+                  okText="Yes, Delete"
+                  cancelText="Cancel"
+                  okButtonProps={{ 
+                    danger: true,
+                    style: { 
+                      fontWeight: 500
+                    }
+                  }}
+                  cancelButtonProps={{
+                    style: { 
+                      fontWeight: 500
+                    }
+                  }}
+                  overlayClassName={style.deletePopconfirm}
+                  placement="topRight"
                 >
                   <Button
                     key="delete"
