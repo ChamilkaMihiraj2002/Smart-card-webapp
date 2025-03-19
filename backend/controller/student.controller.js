@@ -88,11 +88,35 @@ const getStudentCount = async (req, res) => {
     }
 };
 
+const getStudentIds = async (req, res) => {
+    try {
+        const students = await Student.find({}, 'stId');
+        const ids = students.map(student => student.stId);
+        res.json(ids);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching student IDs' });
+    }
+};
+
+const searchStudents = async (req, res) => {
+    try {
+      const { query } = req.query;
+      const students = await Student.find({ 
+        stId: { $regex: query, $options: 'i' }
+      }, 'stId').limit(10);
+      res.json(students.map(student => ({ id: student.stId })));
+    } catch (error) {
+      res.status(500).json({ message: 'Error searching students' });
+    }
+};
+
 module.exports = {
     getStudents,
     addStudent,
     getStudent,
     updateStudent,
     deleteStudent,
-    getStudentCount
+    getStudentCount,
+    getStudentIds,
+    searchStudents
 };

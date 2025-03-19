@@ -85,7 +85,7 @@
 
 /* Add specific icon colors for each card */
 .students-stat .anticon {
-    color: #3f8600;
+    color: #1890ff;
 }
 
 .classes-stat .anticon {
@@ -93,11 +93,11 @@
 }
 
 .users-stat .anticon {
-    color: #722ed1;
+    color: #1890ff;
 }
 
 .date-stat .anticon {
-    color: #cf1322;
+    color: #1890ff;
 }
 
 /* Add a hover effect for icons */
@@ -112,7 +112,7 @@
 }
 
 .students-stat .ant-statistic-content-value {
-    color: #3f8600;
+    color: #1890ff;
     font-size: 28px;
 }
 
@@ -122,12 +122,12 @@
 }
 
 .users-stat .ant-statistic-content-value {
-    color: #722ed1;
+    color: #1890ff;
     font-size: 28px;
 }
 
 .date-stat .ant-statistic-content-value {
-    color: #cf1322;
+    color: #1890ff;
     font-size: 28px;
 }
 
@@ -172,4 +172,82 @@
 
 .ant-card {
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Today's Classes Section Styling */
+.today-classes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.today-classes-card {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  animation: fadeIn 0.6s ease-out;
+}
+
+.class-card {
+  transition: all 0.3s ease;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  border-top: 4px solid #1890ff;
+}
+
+.class-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.class-card-subject {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.subject-icon {
+  font-size: 20px;
+  color: #1890ff;
+  margin-right: 10px;
+}
+
+.class-card-time {
+  display: flex;
+  align-items: center;
+  background-color: #f0f7ff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.time-icon {
+  font-size: 16px;
+  color: #1890ff;
+  margin-right: 8px;
+}
+
+.class-card-details {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.class-id-badge {
+  background-color: #f5f5f5;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  display: inline-block;
+  margin-top: 6px;
+}
+
+.no-classes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  color: #bfbfbf;
+  text-align: center;
 }

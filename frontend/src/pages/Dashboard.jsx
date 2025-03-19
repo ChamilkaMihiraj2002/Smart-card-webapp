@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react"; // Add useEffect
-import { Layout, Card, Row, Col, Statistic, Image } from "antd";
+import { Layout, Card, Row, Col, Statistic, List, Typography } from "antd";
 import { 
   UserOutlined, 
   TeamOutlined, 
   BookOutlined, 
-  CalendarOutlined 
+  CalendarOutlined,
+  ClockCircleOutlined
 } from '@ant-design/icons';
 import Navbar from "../components/Navbar/Navbar";
 import './Dashboard.css';
 
 const { Header, Content, Footer } = Layout;
+const { Title, Text } = Typography;
 
 const Dashboard = () => {
   const [currentDate] = useState(new Date().toLocaleDateString());
@@ -18,6 +20,8 @@ const Dashboard = () => {
     classCount: 0,
     userCount: 0
   });
+  const [todayClasses, setTodayClasses] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -54,7 +58,38 @@ const Dashboard = () => {
       }
     };
 
+    const fetchTodayClasses = async () => {
+      try {
+        setLoading(true);
+        const token = localStorage.getItem('token');
+        if (!token) {
+          console.error('No token found');
+          return;
+        }
+
+        const headers = {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        };
+
+        // Get current weekday (0 = Sunday, 1 = Monday, etc.)
+        const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'saturday'];
+        const today = new Date();
+        const weekday = weekdays[today.getDay()];
+        
+        const response = await fetch(`http://localhost:3000/api/classes/day/${weekday}`, { headers });
+        const data = await response.json();
+        
+        setTodayClasses(data);
+      } catch (error) {
+        console.error('Error fetching today\'s classes:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchStats();
+    fetchTodayClasses();
   }, []); // Empty dependency array means this runs once when component mounts
 
   return (
@@ -111,22 +146,56 @@ const Dashboard = () => {
           </Col>
         </Row>
 
-        {/* Add new image section */}
+        {/* Today's Classes Section */}
         <Row gutter={[16, 16]} style={{ marginTop: '24px' }}>
           <Col span={24}>
-            <Card className="dashboard-image-card">
-              <div className="dashboard-image-container">
-                <Image
-                  src="/path-to-your-image.jpg" // Replace with your image path
-                  alt="Dashboard Overview"
-                  style={{
-                    width: '100%',
-                    maxHeight: '300px',
-                    objectFit: 'cover',
-                    borderRadius: '8px'
-                  }}
+            <Card 
+              title={
+                <div className="today-classes-header">
+                  <Title level={4}>Today's Classes</Title>
+                  <Text type="secondary">{new Date().toLocaleDateString('en-US', {weekday: 'long'})}</Text>
+                </div>
+              }
+              className="today-classes-card"
+              loading={loading}
+            >
+              {todayClasses.length > 0 ? (
+                <List
+                  grid={{ gutter: 16, xs: 1, sm: 2, md: 3, lg: 3, xl: 4, xxl: 4 }}
+                  dataSource={todayClasses}
+                  renderItem={(item) => (
+                    <List.Item>
+                      <Card 
+                        className="class-card"
+                        hoverable
+                      >
+                        <div className="class-card-subject">
+                          <BookOutlined className="subject-icon" />
+                          <Title level={5}>{item.subject}</Title>
+                        </div>
+                        <div className="class-card-time">
+                          <ClockCircleOutlined className="time-icon" />
+                          <Text>{item.time}</Text>
+                        </div>
+                        <div className="class-card-details">
+                          <Text type="secondary" style={{ display: 'block', marginTop: '8px' }}>
+                            <UserOutlined style={{ marginRight: '8px' }} />
+                            {item.teacher}
+                          </Text>
+                          <Text type="secondary">
+                            <span className="class-id-badge">{item.classId}</span>
+                          </Text>
+                        </div>
+                      </Card>
+                    </List.Item>
+                  )}
                 />
-              </div>
+              ) : (
+                <div className="no-classes">
+                  <BookOutlined style={{ fontSize: '48px', opacity: 0.3 }} />
+                  <Text type="secondary" style={{ fontSize: '16px', marginTop: '16px' }}>No classes scheduled for today</Text>
+                </div>
+              )}
             </Card>
           </Col>
         </Row>

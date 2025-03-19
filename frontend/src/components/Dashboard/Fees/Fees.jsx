@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Card, Button, Modal, Form, Input, InputNumber, Select, message, Popconfirm } from "antd";
+import { Layout, Card, Button, Modal, Form, Input, InputNumber, Select, message, Popconfirm, AutoComplete } from "antd";
 import { EditOutlined, DeleteOutlined, PlusOutlined, UserOutlined, ExclamationCircleFilled } from '@ant-design/icons';
 import Navbar from "../../Navbar/Navbar.jsx";
 import axios from 'axios';
@@ -14,6 +14,8 @@ const Fees = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [studentOptions, setStudentOptions] = useState([]);
+  const [classOptions, setClassOptions] = useState([]);
 
   const token = localStorage.getItem('token');
   const config = {
@@ -28,6 +30,8 @@ const Fees = () => {
       return;
     }
     fetchFees();
+    fetchStudentIDs();
+    fetchClassIDs();
   }, []);
 
   const fetchFees = async () => {
@@ -40,6 +44,50 @@ const Fees = () => {
       console.error('Error:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchStudentIDs = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/api/students/ids', config);
+      const options = response.data.map(id => ({ value: id }));
+      setStudentOptions(options);
+    } catch (error) {
+      console.error('Error fetching student IDs:', error);
+    }
+  };
+
+  const fetchClassIDs = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/api/classes/ids', config);
+      const options = response.data.map(id => ({ value: id }));
+      setClassOptions(options);
+    } catch (error) {
+      console.error('Error fetching class IDs:', error);
+    }
+  };
+
+  const onStudentSearch = async (value) => {
+    if (value.length >= 2) {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/students/search?query=${value}`, config);
+        const options = response.data.map(student => ({ value: student.id }));
+        setStudentOptions(options);
+      } catch (error) {
+        console.error('Error searching students:', error);
+      }
+    }
+  };
+
+  const onClassSearch = async (value) => {
+    if (value.length >= 2) {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/classes/search?query=${value}`, config);
+        const options = response.data.map(cls => ({ value: cls.id }));
+        setClassOptions(options);
+      } catch (error) {
+        console.error('Error searching classes:', error);
+      }
     }
   };
 
@@ -239,15 +287,33 @@ const Fees = () => {
               label="Class ID"
               rules={[{ required: true, message: 'Please input the class ID!' }]}
             >
-              <Input />
+              <AutoComplete
+                options={classOptions}
+                onSearch={onClassSearch}
+                placeholder="Type to search class IDs"
+                filterOption={(inputValue, option) =>
+                  option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                }
+                notFoundContent="No matching class ID found"
+              />
             </Form.Item>
+            
             <Form.Item
               name="stId"
               label="Student ID"
               rules={[{ required: true, message: 'Please input the student ID!' }]}
             >
-              <Input />
+              <AutoComplete
+                options={studentOptions}
+                onSearch={onStudentSearch}
+                placeholder="Type to search student IDs"
+                filterOption={(inputValue, option) =>
+                  option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                }
+                notFoundContent="No matching student ID found"
+              />
             </Form.Item>
+
             <Form.Item
               name="amount"
               label="Amount"

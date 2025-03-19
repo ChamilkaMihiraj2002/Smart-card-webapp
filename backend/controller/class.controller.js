@@ -5,6 +5,7 @@ const getClasses = async (req, res) => {
         const classes = await Class.find({});
         res.status(200).json(classes);
     } catch (error) {
+        console.error("Error fetching classes:", error);
         res.status(500).json({ message: error.message });
     }
 }
@@ -20,6 +21,7 @@ const addClass = async (req, res) => {
         } else if (error.code === 11000) {
             res.status(400).json({ message: 'Duplicate class id' });
         } else {
+            console.error("Error adding class:", error);
             res.status(500).json({ message: error.message });
         }
     }
@@ -31,12 +33,12 @@ const getClass = async (req, res) => {
         const classes = await Class.findOne({ classId });
 
         if (!classes) {
-            return res.status(404).json({ message: `Classs not found with id: ${classId}` });
+            return res.status(404).json({ message: `Class not found with id: ${classId}` });
         }
 
         res.status(200).json(classes);
     } catch (error) {
-        console.error("Error fetching student:", error);
+        console.error("Error fetching class:", error);
         res.status(500).json({ message: "Internal Server Error" });
     }
 }
@@ -46,13 +48,13 @@ const getClassWeekday = async (req, res) => {
         const { weekday } = req.params;
         const classes = await Class.find({ weekday });
 
-        if (!classes) {
-            return res.status(404).json({ message: `Classs not found with weekday: ${weekday}` });
+        if (classes.length === 0) {
+            return res.status(404).json({ message: `Classes not found with weekday: ${weekday}` });
         }
 
         res.status(200).json(classes);
     } catch (error) {
-        console.error("Error fetching student:", error);
+        console.error("Error fetching classes by weekday:", error);
         res.status(500).json({ message: "Internal Server Error" });
     }
 };
@@ -60,7 +62,7 @@ const getClassWeekday = async (req, res) => {
 const updateClass = async (req, res) => {
     try {
         const { classId } = req.params;
-        const classes = await Class.findOneAndUpdate({ classId }, req.body);
+        const classes = await Class.findOneAndUpdate({ classId }, req.body, { runValidators: true });
 
         if(!classes) {
             return res.status(404).json({ message: "Class not found" });
@@ -74,6 +76,7 @@ const updateClass = async (req, res) => {
         } else if (error.code === 11000) {
             return res.status(400).json({ message: 'Duplicate Class id' });
         } else {
+            console.error("Error updating class:", error);
             return res.status(500).json({ message: error.message });
         }
     }
@@ -102,6 +105,28 @@ const getClassCount = async (req, res) => {
     }
 };
 
+const getClassIds = async (req, res) => {
+    try {
+      const classes = await Class.find({}, 'classId');
+      const ids = classes.map(cls => cls.classId);
+      res.json(ids);
+    } catch (error) {
+      res.status(500).json({ message: 'Error fetching class IDs' });
+    }
+};
+
+const searchClasses = async (req, res) => {
+    try {
+      const { query } = req.query;
+      const classes = await Class.find({ 
+        classId: { $regex: query, $options: 'i' }
+      }, 'classId').limit(10);
+      res.json(classes.map(cls => ({ id: cls.classId })));
+    } catch (error) {
+      res.status(500).json({ message: 'Error searching classes' });
+    }
+};
+
 module.exports = {
     getClasses,
     addClass,
@@ -109,5 +134,7 @@ module.exports = {
     updateClass,
     deleteClass,
     getClassCount,
-    getClassWeekday
+    getClassWeekday,
+    getClassIds,
+    searchClasses
 };
