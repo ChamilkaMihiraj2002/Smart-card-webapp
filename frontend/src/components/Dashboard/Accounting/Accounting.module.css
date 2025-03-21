@@ -1,0 +1,198 @@
+.accountingContainer {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.pageTitle {
+    font-size: 28px;
+    margin-bottom: 24px;
+    color: #1890ff;
+    border-bottom: 2px solid #1890ff;
+    padding-bottom: 12px;
+    position: relative;
+    display: inline-block;
+}
+
+.pageTitle::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 60%;
+    height: 2px;
+    background-color: #52c41a;
+}
+
+.cardContainer {
+    margin-bottom: 24px;
+    transition: all 0.3s ease;
+}
+
+.summaryCard {
+    text-align: center;
+    background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.summaryCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.summaryCard::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(45deg);
+    pointer-events: none;
+}
+
+.summaryValue {
+    font-size: 36px;
+    font-weight: bold;
+    margin: 12px 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.summaryLabel {
+    color: #ffffff;
+    font-size: 18px;
+    opacity: 0.9;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.tableContainer {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.tableContainer:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.monthColumn {
+    font-weight: 600;
+    color: #1890ff;
+}
+
+.infoIcon {
+    margin-left: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.infoIcon:hover {
+    transform: scale(1.2);
+    color: #1890ff;
+}
+
+.chartContainer {
+    height: 400px;
+    margin-bottom: 24px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.chartContainer:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* New styles for enhanced visuals */
+.dataRefreshInfo {
+    display: flex;
+    align-items: center;
+    background-color: #f6ffed;
+    border: 1px solid #b7eb8f;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-bottom: 16px;
+}
+
+.lastUpdatedBadge {
+    background-color: rgba(24, 144, 255, 0.1);
+    border-radius: 16px;
+    padding: 4px 12px;
+    display: inline-flex;
+    align-items: center;
+    color: #1890ff;
+    font-size: 14px;
+}
+
+.chartTitle {
+    font-size: 20px;
+    font-weight: 500;
+    color: #262626;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.chartIcon {
+    margin-right: 8px;
+    color: #1890ff;
+}
+
+.tableHeader {
+    background-color: #f5f5f5;
+    font-weight: 600;
+}
+
+.positiveValue {
+    color: #52c41a;
+    font-weight: 600;
+}
+
+.negativeValue {
+    color: #f5222d;
+    font-weight: 600;
+}
+
+.refreshButton {
+    transition: all 0.3s ease;
+    border-radius: 6px;
+}
+
+.refreshButton:hover {
+    background-color: #096dd9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+    .summaryValue {
+        font-size: 24px;
+    }
+    
+    .summaryLabel {
+        font-size: 14px;
+    }
+    
+    .chartContainer {
+        height: 300px;
+    }
+}
+
+/* Animation for data refresh */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 1; }
+}
+
+.dataRefreshing {
+    animation: pulse 1.5s infinite ease-in-out;
+}
