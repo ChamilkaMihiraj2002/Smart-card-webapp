@@ -73,7 +73,7 @@ const Dashboard = () => {
         };
 
         // Get current weekday (0 = Sunday, 1 = Monday, etc.)
-        const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'saturday'];
+        const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         const today = new Date();
         const weekday = weekdays[today.getDay()];
         
