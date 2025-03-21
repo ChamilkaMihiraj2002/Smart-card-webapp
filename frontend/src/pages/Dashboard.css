@@ -31,6 +31,19 @@
     border-radius: 2px;
 }
 
+/* Enhanced title design with accent decoration */
+.dashboard-title::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 1px;
+    background: rgba(24, 144, 255, 0.3);
+    border-radius: 2px;
+}
+
 .stat-card {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
@@ -46,12 +59,34 @@
     flex-direction: column;
     justify-content: center;
     animation: fadeIn 0.5s ease-out;
+    position: relative;
+}
+
+/* Add card accent decoration */
+.stat-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background: #1890ff;
+    opacity: 0.7;
+    border-radius: 3px;
+    transition: all 0.3s ease;
 }
 
 .stat-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     border-color: #1890ff;
+}
+
+/* Enhanced hover effect */
+.stat-card:hover::after {
+    width: 8px;
+    opacity: 1;
+    box-shadow: 0 0 10px rgba(24, 144, 255, 0.5);
 }
 
 .stat-card .ant-statistic {
@@ -103,6 +138,7 @@
 /* Add a hover effect for icons */
 .stat-card:hover .anticon {
     transform: scale(1.1);
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.1));
 }
 
 .stat-card .anticon {
@@ -111,24 +147,29 @@
     opacity: 0.8;
 }
 
+/* Colored statistics for each card type */
 .students-stat .ant-statistic-content-value {
     color: #1890ff;
     font-size: 28px;
+    text-shadow: 0px 1px 2px rgba(24, 144, 255, 0.2);
 }
 
 .classes-stat .ant-statistic-content-value {
     color: #1890ff;
     font-size: 28px;
+    text-shadow: 0px 1px 2px rgba(82, 196, 26, 0.2);
 }
 
 .users-stat .ant-statistic-content-value {
     color: #1890ff;
     font-size: 28px;
+    text-shadow: 0px 1px 2px rgba(250, 173, 20, 0.2);
 }
 
 .date-stat .ant-statistic-content-value {
     color: #1890ff;
     font-size: 28px;
+    text-shadow: 0px 1px 2px rgba(245, 34, 45, 0.2);
 }
 
 .dashboard-footer {
@@ -138,6 +179,13 @@
     border-top: 1px solid #f0f0f0;
     font-size: 14px;
     color: #595959;
+}
+
+/* Enhanced footer with subtle gradient */
+.dashboard-footer {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.01));
+    padding: 24px;
+    font-size: 14px;
 }
 
 @media (max-width: 768px) {
@@ -165,6 +213,19 @@
     }
 }
 
+/* New animation for cards */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(24, 144, 255, 0.15);
+    }
+    100% {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+}
+
 .ant-card-head-title {
   font-size: 16px;
   font-weight: 600;
@@ -172,6 +233,13 @@
 
 .ant-card {
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+/* Add hover effect to all cards */
+.ant-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transform: translateY(-3px);
 }
 
 /* Today's Classes Section Styling */
@@ -179,12 +247,30 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 16px;
+  border-bottom: 2px solid rgba(24, 144, 255, 0.2);
+  padding-bottom: 12px;
+  position: relative;
+}
+
+/* Add decorative element to section headers */
+.today-classes-header::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: #1890ff;
+  border-radius: 2px;
 }
 
 .today-classes-card {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
   border-radius: 12px;
   animation: fadeIn 0.6s ease-out;
+  background: white;
+  overflow: hidden;
 }
 
 .class-card {
@@ -193,6 +279,24 @@
   border-radius: 10px;
   overflow: hidden;
   border-top: 4px solid #1890ff;
+  position: relative;
+}
+
+/* Add colorful indicators for different class types */
+.class-card.math {
+  border-top-color: #1890ff;
+}
+
+.class-card.science {
+  border-top-color: #52c41a;
+}
+
+.class-card.history {
+  border-top-color: #faad14;
+}
+
+.class-card.language {
+  border-top-color: #f5222d;
 }
 
 .class-card:hover {
@@ -210,6 +314,13 @@
   font-size: 20px;
   color: #1890ff;
   margin-right: 10px;
+  transition: all 0.3s ease;
+}
+
+/* Enhance subject icons */
+.class-card:hover .subject-icon {
+  transform: scale(1.15);
+  color: #096dd9;
 }
 
 .class-card-time {
@@ -219,6 +330,14 @@
   padding: 6px 10px;
   border-radius: 6px;
   margin-bottom: 12px;
+  transition: all 0.3s ease;
+}
+
+/* Enhance time indicator */
+.class-card:hover .class-card-time {
+  background-color: #e6f7ff;
+  transform: scale(1.02);
+  box-shadow: 0 2px 6px rgba(24, 144, 255, 0.1);
 }
 
 .time-icon {
@@ -231,6 +350,23 @@
   margin-top: 12px;
   padding-top: 12px;
   border-top: 1px solid #f0f0f0;
+  position: relative;
+}
+
+/* Add subtle highlighting to details section */
+.class-card-details::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 40px;
+  height: 1px;
+  background: #1890ff;
+  transition: all 0.3s ease;
+}
+
+.class-card:hover .class-card-details::before {
+  width: 60px;
 }
 
 .class-id-badge {
@@ -240,6 +376,14 @@
   font-size: 12px;
   display: inline-block;
   margin-top: 6px;
+  transition: all 0.3s ease;
+}
+
+/* Enhance ID badge */
+.class-card:hover .class-id-badge {
+  background-color: #e6f7ff;
+  color: #1890ff;
+  box-shadow: 0 2px 4px rgba(24, 144, 255, 0.1);
 }
 
 .no-classes {
@@ -250,4 +394,77 @@
   padding: 40px 0;
   color: #bfbfbf;
   text-align: center;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 8px;
+  border: 1px dashed #d9d9d9;
+}
+
+/* Progress indicator for dashboard */
+.dashboard-progress {
+  margin-top: 24px;
+  margin-bottom: 36px;
+}
+
+.progress-title {
+  font-size: 18px;
+  margin-bottom: 16px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.progress-icon {
+  margin-right: 8px;
+  color: #1890ff;
+}
+
+.ant-progress-text {
+  font-weight: 600;
+}
+
+/* Enhanced status indicators */
+.status-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.status-active {
+  background-color: #f6ffed;
+  color: #52c41a;
+  border: 1px solid #b7eb8f;
+}
+
+.status-pending {
+  background-color: #fff7e6;
+  color: #faad14;
+  border: 1px solid #ffd591;
+}
+
+.status-completed {
+  background-color: #e6f7ff;
+  color: #1890ff;
+  border: 1px solid #91d5ff;
+}
+
+/* Glassmorphism effect for featured items */
+.featured-item {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+
+.featured-item:hover {
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+  transform: translateY(-5px);
 }
