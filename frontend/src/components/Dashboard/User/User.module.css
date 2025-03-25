@@ -1,0 +1,26 @@
+.userManagementLayout {
+    min-height: 100vh;
+}
+
+.header {
+    background-color: #001529;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+}
+
+.sider {
+    background-color: #f0f2f5;
+    padding: 20px;
+    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+}
+
+.content {
+    padding: 24px;
+    background-color: #fff;
+}
+
+.footer {
+    text-align: center;
+    background-color: #f0f2f5;
+}
