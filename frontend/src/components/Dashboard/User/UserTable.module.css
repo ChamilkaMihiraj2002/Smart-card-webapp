@@ -1,0 +1,31 @@
+.userTableContainer {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.actionButtons {
+    display: flex;
+    gap: 10px;
+}
+
+.actionButtons button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hover and focus states */
+.actionButtons button:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .actionButtons {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
