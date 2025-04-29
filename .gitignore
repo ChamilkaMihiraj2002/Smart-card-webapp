@@ -1,0 +1,5 @@
+
+backend/node_modules/.bin/mime
+backend/node_modules/.bin/nodemon
+backend/node_modules/.bin/mime
+backend/node_modules/@mongodb-js/saslprep/dist/browser.d.ts
