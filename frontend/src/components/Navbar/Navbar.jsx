@@ -13,7 +13,6 @@ import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const navigate = useNavigate();
-
   const menuItems = [
     { label: "Dashboard", key: "dashboard", icon: <DashboardOutlined /> },
     { label: "Students", key: "students", icon: <UserOutlined /> },
