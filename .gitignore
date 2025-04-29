@@ -3,3 +3,12 @@ backend/node_modules/.bin/mime
 backend/node_modules/.bin/nodemon
 backend/node_modules/.bin/mime
 backend/node_modules/@mongodb-js/saslprep/dist/browser.d.ts
+backend/node_modules/.bin/nodemon
+backend/node_modules/.bin/mime
+backend/node_modules/.bin/nodemon
+backend/node_modules/.bin/semver
+backend/node_modules/@mongodb-js/saslprep/dist/code-points-data-browser.d.ts
+backend/node_modules/@mongodb-js/saslprep/dist/code-points-data-browser.d.ts.map
+backend/node_modules/@mongodb-js/saslprep/dist/code-points-data.d.ts
+backend/node_modules/@mongodb-js/saslprep/dist/memory-code-points.js
+backend/node_modules/binary-extensions/package.json
