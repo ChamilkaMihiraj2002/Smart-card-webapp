@@ -13,3 +13,4 @@ backend/node_modules/@mongodb-js/saslprep/dist/code-points-data.d.ts
 backend/node_modules/@mongodb-js/saslprep/dist/memory-code-points.js
 backend/node_modules/binary-extensions/package.json
 backend/node_modules/.bin/mime.ps1
+/backend/node_modules/.bin
