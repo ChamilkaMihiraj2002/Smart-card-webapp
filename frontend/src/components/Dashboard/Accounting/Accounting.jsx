@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Layout, Card, Table, Row, Col, Statistic, Spin, Alert, Tooltip, Typography, Button, Space } from "antd";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer } from 'recharts';
-import { InfoCircleOutlined, DollarOutlined, TeamOutlined, SyncOutlined, CheckCircleOutlined } from '@ant-design/icons';
+import { InfoCircleOutlined, DollarOutlined, TeamOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import Navbar from "../../Navbar/Navbar.jsx";
 import styles from './Accounting.module.css';
@@ -14,17 +14,12 @@ const Accounting = () => {
   const [yearSummary, setYearSummary] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [refreshing, setRefreshing] = useState(false);
   const [lastUpdated, setLastUpdated] = useState(null);
 
   // Extract fetch logic into a reusable function
-  const fetchAccountingData = useCallback(async (showRefreshing = false) => {
+  const fetchAccountingData = useCallback(async () => {
     try {
-      if (showRefreshing) {
-        setRefreshing(true);
-      } else {
-        setLoading(true);
-      }
+      setLoading(true);
       
       // Get token from localStorage
       const token = localStorage.getItem('token');
@@ -59,7 +54,6 @@ const Accounting = () => {
       setError('Failed to load accounting data. Please try again later.');
     } finally {
       setLoading(false);
-      setRefreshing(false);
     }
   }, []);
 
@@ -71,15 +65,15 @@ const Accounting = () => {
   // Setup periodic refresh every 5 minutes
   useEffect(() => {
     const refreshInterval = setInterval(() => {
-      fetchAccountingData(true);
+      fetchAccountingData();
     }, 5 * 60 * 1000); // 5 minutes in milliseconds
 
     return () => clearInterval(refreshInterval);
   }, [fetchAccountingData]);
-
+  
   // Handle manual refresh
   const handleRefresh = () => {
-    fetchAccountingData(true);
+    fetchAccountingData();
   };
 
   const columns = [
@@ -127,14 +121,6 @@ const Accounting = () => {
                   Last updated: {lastUpdated.toLocaleTimeString()}
                 </span>
               )}
-              <Button 
-                type="primary" 
-                icon={<SyncOutlined spin={refreshing} />} 
-                onClick={handleRefresh}
-                loading={refreshing}
-              >
-                {refreshing ? 'Refreshing...' : 'Refresh Data'}
-              </Button>
             </Space>
           </div>
 
@@ -205,7 +191,6 @@ const Accounting = () => {
                 title="Monthly Income" 
                 className={styles.chartContainer} 
                 style={{ height: '400px', marginBottom: '24px' }}
-                extra={refreshing && <Spin size="small" />}
               >
                 {monthlyData.length > 0 ? (
                   <ResponsiveContainer width="100%" height={300}>
@@ -236,7 +221,6 @@ const Accounting = () => {
                   </span>
                 }
                 className={styles.tableContainer}
-                extra={refreshing && <Spin size="small" />}
               >
                 <Table 
                   columns={columns}
